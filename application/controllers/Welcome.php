@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends CI_Controller
+{
 
 	public function index()
 	{
@@ -9,7 +10,12 @@ class Welcome extends CI_Controller {
 		$this->load->view('home');
 		$this->load->view('footer');
 	}
-	public function member(){
+	public function member()
+	{
 		$this->load->view('loginmember');
+	}
+	public function joinMember()
+	{
+		$this->load->view('join_member');
 	}
 }

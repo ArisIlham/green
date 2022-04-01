@@ -18,26 +18,26 @@ class Member_model extends CI_Model
     {
         return [
             [
-                'field' => 'name',
-                'label' => 'name',
+                'field' => 'nama',
+                'label' => 'Nama',
                 'rules' => 'required'
             ],
 
             [
                 'field' => 'no_hp',
-                'label' => 'no_hp',
+                'label' => 'No Hp',
                 'rules' => 'numeric'
             ],
 
             [
                 'field' => 'password',
-                'label' => 'password',
+                'label' => 'Password',
                 'rules' => 'required'
             ],
 
             [
                 'field' => 'alamat',
-                'label' => 'alamat',
+                'label' => 'Alamat',
                 'rules' => 'required'
             ]
         ];
