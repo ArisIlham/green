@@ -31,7 +31,7 @@ class Member_model extends CI_Model
 
             [
                 'field' => 'password',
-                'label' => 'Password',
+                'label' => 'Kata Sandi',
                 'rules' => 'required'
             ],
 

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <title>Join Member</title>
 </head>
 
@@ -20,22 +21,26 @@
                         <h5 class="text-center">Join Member</h5>
                     </div>
                     <div class="card-body">
-                        <form action=<?= site_url('Member/register') ?> method="POST">
+                        <form action=<?= site_url('Member/register') ?> method="POST" id="join">
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
-                                <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Anda" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="no_hp" class="form-label">No HP</label>
-                                <input type="number" class="form-control" id="no_hp" name="no_hp">
+                                <label for="no_hp" class="form-label">Nomor HP</label>
+                                <input type="text" class="form-control" id="no_hp" placeholder="Masukkan No HP Anda" name="no_hp">
                             </div>
                             <div class=" mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password">
+                                <label for="password" class="form-label">Kata Sandi</label>
+                                <input type="password" class="form-control" id="password" placeholder="Buat Kata Sandi" name="password">
+                            </div>
+                            <div class=" mb-3">
+                                <label for="repassword" class="form-label">Ulangi Kata Sandi</label>
+                                <input type="password" class="form-control" id="repassword" placeholder="Konfirmasi Kata Sandi" name="repassword">
                             </div>
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Anda" aria-describedby="emailHelp">
                             </div>
                             <!-- <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -49,5 +54,56 @@
         </div>
     </div>
 </body>
+
+<script>
+    $(document).ready(function() {
+        $("#join").validate({
+            rules: {
+                nama: {
+                    required: true,
+                    minlength: 3,
+                },
+                no_hp: {
+                    required: true,
+                    number: true,
+                    minlength: 12,
+                },
+                password: {
+                    required: true,
+                    minlength: 8,
+                },
+                repassword: {
+                    required: true,
+                    equalTo: "#password"
+                },
+                alamat: {
+                    required: true,
+                }
+            },
+            messages: {
+                nama: {
+                    required: "Mohon Masukan Nama Anda",
+                    minlength: "Nama Minimal 3 Karakter"
+                },
+                no_hp: {
+                    required: "Mohon Masukan Nomor HP Anda",
+                    number: "Mohon Masukan Nomor HP dengan Benar",
+                    minlength: "Nomor HP Minimal 12 Angka"
+                },
+                password: {
+                    required: "Mohon Masukan Kata Sandi Anda",
+                    minlength: "Kata Sandi Minimal 8 Karakter"
+                },
+                repassword: {
+                    required: "Mohon Konfirmasi Kata Sandi Anda",
+                    equalTo: "Kata Sandi tidak Cocok "
+                },
+                alamat: {
+                    required: "Mohon Masukan Alamat Anda"
+                }
+            }
+        });
+    });
+</script>
 
 </html>
