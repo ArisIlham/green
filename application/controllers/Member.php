@@ -24,6 +24,12 @@ class Member extends CI_Controller
         }
     }
 
+    public function uniqe()
+    {
+        $member = $this->Member_model;
+        echo $member->uniqeHP($this->input->post('no_hp'));
+    }
+
     public function login()
     {
         $this->load->view('loginmember');

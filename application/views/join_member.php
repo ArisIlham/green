@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <title>Join Member</title>
 </head>
 
@@ -57,7 +57,16 @@
 
 <script>
     $(document).ready(function() {
+        // $("form").submit(function(event) {
+        //     var formData = $("form").serialize();
+        //     $.post("<?= site_url('Member/register') ?>", function(formData) {
+        //         // place success code here
+        //     });
+
+        //     event.preventDefault();
+        // });
         $("#join").validate({
+            ignore: [],
             rules: {
                 nama: {
                     required: true,
@@ -67,6 +76,17 @@
                     required: true,
                     number: true,
                     minlength: 12,
+                    remote: {
+                        url: "<?= site_url('Member/uniqe') ?>",
+                        type: "post",
+                        async: false,
+                        data: {
+                            no_hp: function() {
+                                return $("#no_hp").val();
+                            }
+                        },
+                        dataType: 'json'
+                    },
                 },
                 password: {
                     required: true,
@@ -88,7 +108,8 @@
                 no_hp: {
                     required: "Mohon Masukan Nomor HP Anda",
                     number: "Mohon Masukan Nomor HP dengan Benar",
-                    minlength: "Nomor HP Minimal 12 Angka"
+                    minlength: "Nomor HP Minimal 12 Angka",
+                    remote: "Nomor HP Sudah Terdaftar"
                 },
                 password: {
                     required: "Mohon Masukan Kata Sandi Anda",
