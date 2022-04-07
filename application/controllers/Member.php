@@ -34,4 +34,9 @@ class Member extends CI_Controller
     {
         $this->load->view('loginmember');
     }
+    public function presensi()
+    {
+        $this->load->view('PresensiKaryawan/index.php');
+    }
+
 }
