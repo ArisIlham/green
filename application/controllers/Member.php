@@ -38,5 +38,8 @@ class Member extends CI_Controller
     {
         $this->load->view('PresensiKaryawan/index.php');
     }
+    public function presensiResult() {
+        $this->load->view('Presensikaryawan/result_presensi_karyawan.php');
+    }
 
 }
