@@ -14,8 +14,4 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('loginmember');
 	}
-	public function joinMember()
-	{
-		$this->load->view('join_member');
-	}
 }

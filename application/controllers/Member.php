@@ -8,6 +8,7 @@ class Member extends CI_Controller
         parent::__construct();
         $this->load->model('Member_model');
         $this->load->library('form_validation');
+        $this->load->helper(['form', 'url']);
     }
 
     public function register()
@@ -18,7 +19,7 @@ class Member extends CI_Controller
 
         if ($validation->run()) {
             $member->newMember();
-            redirect('Member/login', 'location');
+            redirect(base_url('Member/login'), 'location');
         } else {
             $this->load->view('join_member');
         }
@@ -27,7 +28,7 @@ class Member extends CI_Controller
     public function uniqe()
     {
         $member = $this->Member_model;
-        echo $member->uniqeHP($this->input->post('no_hp'));
+        echo $member->uniqeHP();
     }
 
     public function login()
@@ -38,5 +39,4 @@ class Member extends CI_Controller
     {
         $this->load->view('PresensiKaryawan/index.php');
     }
-
 }

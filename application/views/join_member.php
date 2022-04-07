@@ -21,7 +21,7 @@
                         <h5 class="text-center">Join Member</h5>
                     </div>
                     <div class="card-body">
-                        <form action=<?= site_url('Member/register') ?> method="POST" id="join">
+                        <form action=<?= base_url('Member/register') ?> method="POST" id="join">
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Anda" aria-describedby="emailHelp">
@@ -46,7 +46,7 @@
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Remember me</label>
                             </div> -->
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -66,7 +66,6 @@
         //     event.preventDefault();
         // });
         $("#join").validate({
-            ignore: [],
             rules: {
                 nama: {
                     required: true,
@@ -77,7 +76,7 @@
                     number: true,
                     minlength: 12,
                     remote: {
-                        url: "<?= site_url('Member/uniqe') ?>",
+                        url: "<?= base_url('Member/uniqe') ?>",
                         type: "post",
                         async: false,
                         data: {
@@ -86,7 +85,7 @@
                             }
                         },
                         dataType: 'json'
-                    },
+                    }
                 },
                 password: {
                     required: true,

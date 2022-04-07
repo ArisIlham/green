@@ -55,13 +55,14 @@ class Member_model extends CI_Model
         return $this->db->insert($this->_table, $this);
     }
 
-    public function uniqeHP($no_hp)
+    public function uniqeHP()
     {
+        $no_hp = $this->input->post("no_hp");
         $check = $this->db->get_where($this->_table, ["no_hp" => $no_hp])->num_rows();
-        if ($check == 1) {
-            return true;
+        if ($check == 0) {
+            return 'true';
         } else {
-            return false;
+            return 'false';
         }
     }
 }
