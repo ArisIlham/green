@@ -1,0 +1,71 @@
+#backGround {
+    background-color: #4E9F3D;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+html, body, * {
+    margin: 0;
+    padding: 0;
+}
+.kotakPresensi {
+    border: 3px solid black;
+    height: 600px;
+    width: 800px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 15px;
+    
+}
+.employeeImage {
+    width: 100px;
+    height: 100px;
+    align-content: center;
+    padding-top: 20px;
+}
+.checkId {
+    width: 180px;
+    height: 50px;
+    background-color: #4E9F3D;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 15px;
+}
+
+.title {
+    padding-top: 20px;
+
+}
+
+#inputId {
+    width: 400px;
+    height: 30px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.nama_karyawan {
+    padding-top: 20px;
+}
+
+.id_karyawan {
+    padding-top: 20px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.btn-group-toggle {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}

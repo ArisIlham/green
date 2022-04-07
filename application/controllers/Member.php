@@ -39,4 +39,11 @@ class Member extends CI_Controller
     {
         $this->load->view('PresensiKaryawan/index.php');
     }
+<<<<<<< HEAD
+=======
+    public function presensiResult() {
+        $this->load->view('Presensikaryawan/result_presensi_karyawan.php');
+    }
+
+>>>>>>> d653c89190426ffbb336d5468535ab5da3435629
 }
