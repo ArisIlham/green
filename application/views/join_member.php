@@ -22,6 +22,7 @@
                     </div>
                     <div class="card-body">
                         <form action=<?= base_url('Member/register') ?> method="POST" id="join">
+                            <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Anda" aria-describedby="emailHelp">
@@ -57,14 +58,37 @@
 
 <script>
     $(document).ready(function() {
-        // $("form").submit(function(event) {
-        //     var formData = $("form").serialize();
-        //     $.post("<?= site_url('Member/register') ?>", function(formData) {
-        //         // place success code here
-        //     });
+        let csrfName = $('.txt_csrfname').attr('name');
+        let csrfHash = $('.txt_csrfname').val();
 
-        //     event.preventDefault();
-        // });
+        $.validator.addMethod("uniqeHP", function(value, element) {
+            let res = false;
+            $.ajax({
+                url: "<?= base_url('Member/uniqe') ?>",
+                type: "post",
+                async: false,
+                data: {
+                    no_hp: function() {
+                        return $("#no_hp").val();
+                    },
+                    [csrfName]: csrfHash
+                },
+                dataType: 'json',
+                success: function(data) {
+
+                    csrfHash = data.csrfHash;
+                    $('.txt_csrfname').val(data.csrfHash);
+
+                    if (data.member == "true") {
+                        res = true;
+                    } else {
+                        res = false;
+                    }
+                }
+            })
+            return res;
+        }, "");
+
         $("#join").validate({
             rules: {
                 nama: {
@@ -75,17 +99,23 @@
                     required: true,
                     number: true,
                     minlength: 12,
-                    remote: {
-                        url: "<?= base_url('Member/uniqe') ?>",
-                        type: "post",
-                        async: false,
-                        data: {
-                            no_hp: function() {
-                                return $("#no_hp").val();
-                            }
-                        },
-                        dataType: 'json'
-                    }
+                    // remote: {
+                    //     url: "<?= base_url('Member/uniqe') ?>",
+                    //     type: "post",
+                    //     async: false,
+                    //     data: {
+                    //         no_hp: function() {
+                    //             return $("#no_hp").val();
+                    //         },
+                    //         [csrfName]: csrfHash
+                    //     },
+                    //     dataType: 'json',
+                    //     success: function(data) {
+                    //         csrfHash = data.csrfHash;
+                    //         csrfName = data.csrfName;
+                    //     }
+                    // }
+                    uniqeHP: true
                 },
                 password: {
                     required: true,
@@ -108,7 +138,7 @@
                     required: "Mohon Masukan Nomor HP Anda",
                     number: "Mohon Masukan Nomor HP dengan Benar",
                     minlength: "Nomor HP Minimal 12 Angka",
-                    remote: "Nomor HP Sudah Terdaftar"
+                    uniqeHP: "Nomor HP Sudah Terdaftar"
                 },
                 password: {
                     required: "Mohon Masukan Kata Sandi Anda",
