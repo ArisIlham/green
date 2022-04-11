@@ -10,8 +10,13 @@ class Welcome extends CI_Controller
 		$this->load->view('home');
 		$this->load->view('footer');
 	}
-	public function member()
+	public function login()
 	{
-		$this->load->view('loginmember');
+		$this->load->view('login_member');
+	}
+
+	public function register()
+	{
+		$this->load->view('join_member');
 	}
 }

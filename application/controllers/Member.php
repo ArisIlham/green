@@ -19,9 +19,9 @@ class Member extends CI_Controller
 
         if ($validation->run()) {
             $member->newMember();
-            redirect(base_url('Member/login'), 'location');
+            redirect(base_url('login'), 'location');
         } else {
-            $this->load->view('join_member');
+            redirect(base_url('register'), 'location');
         }
     }
 
@@ -34,6 +34,8 @@ class Member extends CI_Controller
 
     public function login()
     {
-        $this->load->view('loginmember');
+        $member = $this->Member_model;
+        $res = array('csrfName' => $this->security->get_csrf_token_name(), 'csrfHash' => $this->security->get_csrf_hash(), 'member' => $member->login());
+        echo json_encode($res);
     }
 }

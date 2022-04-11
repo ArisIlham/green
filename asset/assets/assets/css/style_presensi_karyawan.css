@@ -27,6 +27,12 @@ html, body, * {
     align-content: center;
     padding-top: 20px;
 }
+
+form {
+    justify-content: center;
+    align-items: center;
+}
+
 .checkId {
     width: 180px;
     height: 50px;

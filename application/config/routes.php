@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -50,5 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
+$route['register'] = 'Welcome/register';
+$route['presensi'] = 'Karyawan/presensi';
+$route['login'] = 'Welcome/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

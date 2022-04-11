@@ -65,4 +65,17 @@ class Member_model extends CI_Model
             return 'false';
         }
     }
+
+    public function login()
+    {
+        $no_hp = $this->input->post("no_hp");
+        $password = $this->input->post("password");
+        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp, "password" => $password))->result();
+
+        if ($member ==  NULL) {
+            return false;
+        } else {
+            return $member;
+        }
+    }
 }

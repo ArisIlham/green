@@ -20,14 +20,15 @@
                         <h5 class="text-center">Login</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="login" action="<?= base_url('Member/login') ?>" method="POST">
+                            <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <div class="mb-3">
-                                <label for="Username" class="form-label">Username</label>
-                                <input type="Username" class="form-control" id="Username" aria-describedby="emailHelp">
+                                <label for="no_hp" class="form-label">Nomor HP</label>
+                                <input type="text" name="no_hp" class="form-control" id="no_hp" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="password">
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
