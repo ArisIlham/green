@@ -73,7 +73,7 @@ class Member_model extends CI_Model
         $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp, "password" => $password))->result();
 
         if ($member ==  NULL) {
-            return false;
+            return 'false';
         } else {
             return $member;
         }

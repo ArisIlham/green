@@ -19,4 +19,9 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('join_member');
 	}
+
+	public function order()
+	{
+		$this->load->view('halaman_penjemputan_customer/index');
+	}
 }

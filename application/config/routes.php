@@ -53,5 +53,6 @@ $route['default_controller'] = 'welcome';
 $route['register'] = 'Welcome/register';
 $route['presensi'] = 'Karyawan/presensi';
 $route['login'] = 'Welcome/login';
+$route['order'] = 'Welcome/order';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

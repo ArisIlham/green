@@ -28,7 +28,9 @@ class Karyawan_model extends CI_Model
         $karyawan = $this->db->get_where($this->_table, ["id_karyawan" => $id])->result();
 
         if ($karyawan ==  NULL) {
-            return false;
+            return 'false';
+        } else {
+            return $karyawan;
         }
     }
 }
