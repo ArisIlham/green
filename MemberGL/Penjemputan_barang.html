@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Penjemputan Barang - Member</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">GREEN LAUNDRY</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+           
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"  >
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+
+                            <a class="nav-link" href="Penjemputan_barang.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Penjemputan Barang
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                               
+                            </div>
+                            <a class="nav-link" href="history.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Histori
+                            </a>
+
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">    
+                            </div>
+                            <a class="nav-link" href="profil.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-eva:car-outline"></i></div>
+                                profil
+                            </a>
+                                
+                    </div>
+                    
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                 <main id="main">
+        <div class="penjemputan-page" style="width: 600px; padding: 5% 0 0; margin: auto;">
+                <h2>
+                    <p class="center" style= "text-align: center; ">Penjemputan Barang <p>
+                </h2>
+            <div class="form" style=" position: relative; z-index: 1; background: #FFFFFF; max-width: 460px; margin: 0 auto 150px; padding: 65px;text-align: center; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);">
+                <form id="Penjemputan-form" >
+                    <div class="form-group">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Nama</label> <input name="nama" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                    </div> <br>
+                    <div class="form-group">
+                       <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Alamat</label> <input name="nama" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                    </div> <br>
+                    <div class="form-group">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">No.Hp</label> <input name="nama" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                    </div><br>
+                    <div class="form-group">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Jenis Barang</label> <input name="nama" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                    </div><br>
+                    <div class="form-group">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Note Barang</label> <input name="nama" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                    </div><br>
+                    <div>
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Waktu Penjemputan</label> <input name="Waktu" type="date" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                    </div>
+
+                    <div class="mt-4 mb-0">
+                             <div class="d-grid"><a class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303" href="proses_penjemputan.html">Pesan</a></div>
+                            </div>
+                            
+
+                    
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"></div>
+                            <div>
+                                <a href="#">
+                                &middot;
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+       
+    </body>
+</html>
