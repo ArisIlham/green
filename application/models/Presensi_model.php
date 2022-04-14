@@ -21,7 +21,7 @@ class Presensi_model extends CI_Model
         $this->nama = $post["nama"];
         $this->status = $post["hadir"];
         if (isset($post["hadir"])) {
-            if ($post["hadir"] == 2)
+            if ($post["hadir"] == "Izin")
                 $this->keterangan = $post["ket"];
         }
         $this->waktu_hadir = $datetime->format('Y-m-d G:i:s');
@@ -37,7 +37,7 @@ class Presensi_model extends CI_Model
             $this->id_presensi = uniqid();
             $this->id_karyawan = $row->id_karyawan;
             $this->nama = $row->nama;
-            $this->status = 0;
+            $this->status = "Tidak Hadir";
             $this->waktu_hadir = $datetime->format('Y-m-d');
             $this->db->insert($this->_table, $this);
         }

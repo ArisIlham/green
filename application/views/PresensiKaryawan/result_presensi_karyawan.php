@@ -22,10 +22,10 @@
                 <input type="hidden" name="id" value="<?= $id_karyawan; ?>">
                 <input type="hidden" name="nama" value="<?= $nama; ?>">
                 <div class="btn-group-toggle">
-                    <input type="radio" name="hadir" id="hadir" value=1 checked>
+                    <input type="radio" name="hadir" id="hadir" value="Hadir" checked>
                     <label for="hadir">Hadir</label>
                     <br><br>
-                    <input type="radio" name="hadir" id="izin" value=2>
+                    <input type="radio" name="hadir" id="izin" value="Izin">
                     <label for="izin" id="lizin">Izin</label>
                 </div>
                 <Button type="submit" class="checkId">Masuk</Button>
