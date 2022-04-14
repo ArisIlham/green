@@ -34,7 +34,7 @@
         $.validator.addMethod("login", function(value, element) {
             let res = false;
             $.ajax({
-                url: "<?= base_url('Karyawan/login') ?>",
+                url: "<?= base_url('Karyawan/checkKaryawan') ?>",
                 type: "post",
                 async: false,
                 data: {

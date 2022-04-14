@@ -24,4 +24,9 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('halaman_penjemputan_customer/index');
 	}
+
+	public function presensi()
+	{
+		$this->load->view('PresensiKaryawan/index.php');
+	}
 }
