@@ -13,32 +13,32 @@ class Presensi_model extends CI_Model
     public function presensi()
     {
         date_default_timezone_set('Asia/Jakarta');
-        $datettime = new DateTime("now");
+        $datetime = new DateTime("now");
         $post = $this->input->post();
-        $this->id_presensi = uniqid();
         $this->id_karyawan = $post["id"];
+        $presensi = $this->db->get_where($this->_table, array("id_karyawan" => $this->id_karyawan))->last_row();
+        $this->id_presensi = $presensi->id_presensi;
         $this->nama = $post["nama"];
         $this->status = $post["hadir"];
         if (isset($post["hadir"])) {
             if ($post["hadir"] == 2)
                 $this->keterangan = $post["ket"];
         }
-        $this->waktu_hadir = $datettime->format('Y-m-d G:i:s');
-        return $this->db->update($this->_table, $this, array('id_karyawan' => $this->id_karyawan));
+        $this->waktu_hadir = $datetime->format('Y-m-d G:i:s');
+        return $this->db->update($this->_table, $this, array('id_presensi' => $this->id_presensi));
     }
 
     public function dailyPresensi()
     {
         date_default_timezone_set('Asia/Jakarta');
-        $datettime = new DateTime("now");
+        $datetime = new DateTime("now");
         $karyawan = $this->db->get("karyawan")->result();
-        $presensi = $this->db->get($this->_table)->result();
         foreach ($karyawan as $row) {
             $this->id_presensi = uniqid();
             $this->id_karyawan = $row->id_karyawan;
             $this->nama = $row->nama;
             $this->status = 0;
-            $this->waktu_hadir = $datettime->format('Y-m-d G:i:s');
+            $this->waktu_hadir = $datetime->format('Y-m-d');
             $this->db->insert($this->_table, $this);
         }
     }

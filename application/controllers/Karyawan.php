@@ -29,6 +29,7 @@ class Karyawan extends CI_Controller
     {
         $karyawan = $this->Presensi_model;
         $karyawan->presensi();
+        // redirect(base_url("Karyawan/login"), "location");
     }
 
     public function dailyPresensi()
