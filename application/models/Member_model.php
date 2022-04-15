@@ -2,6 +2,7 @@
 
 class Member_model extends CI_Model
 {
+
     private $_table = "member";
 
     public $id_member;
@@ -49,7 +50,7 @@ class Member_model extends CI_Model
         $this->id_member = uniqid();
         $this->no_hp = $post["no_hp"];
         $this->nama = $post["nama"];
-        $this->password = $post["password"];
+        $this->password = password_hash($post["password"], PASSWORD_DEFAULT);
         $this->alamat = $post["alamat"];
         $this->tier_member = 1;
         return $this->db->insert($this->_table, $this);
@@ -70,12 +71,17 @@ class Member_model extends CI_Model
     {
         $no_hp = $this->input->post("no_hp");
         $password = $this->input->post("password");
-        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp, "password" => $password))->result();
+        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp))->row();
+
+        // return $member->password;
+        // return password_verify($password, $member->password);
 
         if ($member ==  NULL) {
             return 'false';
-        } else {
+        } else if (password_verify($password, $member->password) == TRUE) {
             return $member;
+        } else {
+            return 'false';
         }
     }
 }
