@@ -67,21 +67,27 @@ class Member_model extends CI_Model
         }
     }
 
-    public function login()
+    public function checkPassword()
     {
         $no_hp = $this->input->post("no_hp");
         $password = $this->input->post("password");
         $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp))->row();
 
-        // return $member->password;
-        // return password_verify($password, $member->password);
-
         if ($member ==  NULL) {
             return 'false';
         } else if (password_verify($password, $member->password) == TRUE) {
-            return $member;
+            return 'true';
         } else {
             return 'false';
         }
+    }
+
+
+    public function login()
+    {
+        $no_hp = $this->input->post("no_hp");
+        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp))->row();
+
+        return $member;
     }
 }

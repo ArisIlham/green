@@ -54,5 +54,6 @@ $route['register'] = 'Welcome/register';
 $route['presensi'] = 'Welcome/presensi';
 $route['login'] = 'Welcome/login';
 $route['order'] = 'Welcome/order';
+$route['member/dashboard'] = 'Welcome/dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

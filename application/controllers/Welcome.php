@@ -35,4 +35,9 @@ class Welcome extends CI_Controller
 		$this->load->view('PresensiKaryawan/index.php', $this->session->flashdata());
 		$this->session->sess_destroy();
 	}
+
+	public function dashboard()
+	{
+		$this->load->view('MemberGL/index.php', $this->session->userdata());
+	}
 }
