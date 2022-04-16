@@ -32,12 +32,19 @@ class Welcome extends CI_Controller
 
 	public function presensi()
 	{
-		$this->load->view('PresensiKaryawan/index.php', $this->session->flashdata());
+		$this->load->view('PresensiKaryawan/index', $this->session->flashdata());
 		$this->session->sess_destroy();
 	}
 
 	public function dashboard()
 	{
-		$this->load->view('MemberGL/index.php', $this->session->userdata());
+		$this->load->view('MemberGL/navigation', ["title" => "Dashboard Member"]);
+		$this->load->view('MemberGL/index', $this->session->userdata());
+	}
+
+	public function orderMember()
+	{
+		$this->load->view('MemberGL/navigation', ["title" => "Order Laundry"]);
+		$this->load->view('MemberGL/Penjemputan_barang', $this->session->userdata());
 	}
 }

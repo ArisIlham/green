@@ -7,6 +7,7 @@ class Member extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Member_model');
+        $this->load->model('Order_model');
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->helper(['form', 'url']);
@@ -57,5 +58,11 @@ class Member extends CI_Controller
         $res = array('member' => $member->login());
         echo json_encode($res);
         redirect(base_url('member/dashboard'), 'location');
+    }
+
+    public function orderMember()
+    {
+        $order = $this->Order_model;
+        $order->orderMember($this->session->userdata("id_member"));
     }
 }
