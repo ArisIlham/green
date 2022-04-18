@@ -43,4 +43,17 @@ class Order_model extends CI_Model
         $this->waktu_jemput = $post["waktu"];
         return $this->db->insert($this->_table, $this);
     }
+
+    public function total($id_member)
+    {
+        $order = $this->db->get_where($this->_table, ["id_member" => $id_member])->result();
+        $total_laundry = 0;
+        $total_harga = 0;
+
+        foreach ($order as $row) {
+            $total_laundry += $row->berat;
+            $total_harga += $row->harga;
+        }
+        return array("total_laundry" => $total_laundry, "total_harga" => $total_harga);
+    }
 }

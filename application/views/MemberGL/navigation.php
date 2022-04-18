@@ -10,6 +10,7 @@
     <title><?= $title; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/styles.css" rel="stylesheet" />
+    <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/profile_member_style.css" rel="stylesheet" />
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/validation.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -64,7 +65,7 @@
 
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         </div>
-                        <a class="nav-link" href="profil.html">
+                        <a class="nav-link" href="<?= base_url('member/profile') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             profil
                         </a>

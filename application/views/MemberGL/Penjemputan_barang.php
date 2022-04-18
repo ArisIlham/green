@@ -12,26 +12,26 @@
                 <form id="order" action="<?= base_url('Member/orderMember') ?>" method="POST">
                     <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class=" form-group">
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Nama</label> <input name="nama" value="<?= $nama; ?>" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="nama">Nama</label> <input id="nama" name="nama" value="<?= $nama; ?>" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                     </div> <br>
                     <div class="form-group">
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Alamat</label> <input name="alamat" value="<?= $alamat; ?>" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="alamat">Alamat</label> <input id="alamat" name="alamat" value="<?= $alamat; ?>" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                     </div> <br>
                     <div class="form-group">
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">No.Hp</label> <input name="no_hp" value="<?= $no_hp; ?>" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="no_hp">No.Hp</label> <input id="no_hp" name="no_hp" value="<?= $no_hp; ?>" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                     </div><br>
                     <div class="form-group">
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Jenis Barang</label> <input name="jenis" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="jenis">Jenis Barang</label> <input id="jenis" name="jenis" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                     </div><br>
                     <div class="form-group">
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Note Barang</label> <input name="note" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="note">Note Barang</label> <input id="note" name="note" type="text" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                     </div><br>
                     <div>
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Waktu Penjemputan</label> <input name="waktu" type="datetime-local" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="waktu">Waktu Penjemputan</label> <input id="waktu" name="waktu" type="datetime-local" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                     </div><br>
                     <div>
-                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;">Kupon</label>
-                        <select name="kupon" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
+                        <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="kupon">Kupon</label>
+                        <select id="kupon" name="kupon" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
                             <option>Aku</option>
                         </select>
                     </div>

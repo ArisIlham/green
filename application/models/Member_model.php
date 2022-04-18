@@ -90,4 +90,13 @@ class Member_model extends CI_Model
 
         return $member;
     }
+
+    public function total($data)
+    {
+        $this->total_laundry = $data["total_laundry"];
+        $this->total_harga = $data["total_harga"];
+        $this->session->set_userdata("total_laundry", $this->total_laundry);
+        $this->session->set_userdata("total_harga", $this->total_harga);
+        $this->db->update($this->_table, array("total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
+    }
 }

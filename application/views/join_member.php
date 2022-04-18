@@ -100,27 +100,12 @@
                     required: true,
                     number: true,
                     minlength: 12,
-                    // remote: {
-                    //     url: "<?= base_url('Member/uniqe') ?>",
-                    //     type: "post",
-                    //     async: false,
-                    //     data: {
-                    //         no_hp: function() {
-                    //             return $("#no_hp").val();
-                    //         },
-                    //         [csrfName]: csrfHash
-                    //     },
-                    //     dataType: 'json',
-                    //     success: function(data) {
-                    //         csrfHash = data.csrfHash;
-                    //         csrfName = data.csrfName;
-                    //     }
-                    // }
                     uniqeHP: true
                 },
                 password: {
                     required: true,
                     minlength: 8,
+                    maxlength: 16
                 },
                 repassword: {
                     required: true,
@@ -143,7 +128,8 @@
                 },
                 password: {
                     required: "Mohon Masukan Kata Sandi Anda",
-                    minlength: "Kata Sandi Minimal 8 Karakter"
+                    minlength: "Kata Sandi Minimal 8 Karakter",
+                    maxlength: "Kata Sandi Maksimal 16 Karakter"
                 },
                 repassword: {
                     required: "Mohon Konfirmasi Kata Sandi Anda",

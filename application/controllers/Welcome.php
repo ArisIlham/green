@@ -18,6 +18,9 @@ class Welcome extends CI_Controller
 	public function login()
 	{
 		$this->load->view('login_member');
+		if ($this->session->userdata('id_member') != NULL) {
+			redirect(base_url('member/dashboard'), 'refresh');
+		}
 	}
 
 	public function register()
@@ -34,25 +37,5 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('PresensiKaryawan/index', $this->session->flashdata());
 		$this->session->sess_destroy();
-	}
-
-	public function dashboard()
-	{
-		$this->load->view('MemberGL/navigation', ["title" => "Dashboard Member"]);
-		if ($this->session->userdata('id_member') == NULL) {
-			redirect(base_url('login'), 'location');
-		} else {
-			$this->load->view('MemberGL/index', $this->session->userdata());
-		}
-	}
-
-	public function orderMember()
-	{
-		$this->load->view('MemberGL/navigation', ["title" => "Order Laundry"]);
-		if ($this->session->userdata('id_member') == NULL) {
-			redirect(base_url('login'), 'location');
-		} else {
-			$this->load->view('MemberGL/Penjemputan_barang', $this->session->userdata());
-		}
 	}
 }

@@ -122,7 +122,6 @@
                 },
                 password: {
                     required: true,
-                    minlength: 8,
                     checkPassword: true
                 }
             },
@@ -135,7 +134,6 @@
                 },
                 password: {
                     required: "Mohon Masukan Kata Sandi Anda",
-                    minlength: "Kata Sandi Minimal 8 Karakter",
                     checkPassword: "Password Anda Salah"
                 }
             }
