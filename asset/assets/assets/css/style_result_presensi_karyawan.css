@@ -68,3 +68,15 @@ html, body, * {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+input[type="radio"] {
+    margin-left: 35%;
+}
+div#ketizin {
+    text-align: center;
+    margin-top: 10px;
+}
+input#ket {
+    height: 30px;
+    width: 100%;
+}

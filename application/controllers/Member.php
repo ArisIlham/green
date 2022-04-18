@@ -65,4 +65,11 @@ class Member extends CI_Controller
         $order = $this->Order_model;
         $order->orderMember($this->session->userdata("id_member"));
     }
+
+    public function order()
+    {
+        $order = $this->Order_model;
+        $order->order();
+        redirect(base_url('order'), 'refresh');
+    }
 }

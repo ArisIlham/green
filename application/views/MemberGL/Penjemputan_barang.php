@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mt-4 mb-0">
-                        <div class="d-grid"><input class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303" type="submit" value="Pesan"></div>
+                        <div class="d-grid"><input class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303" type="submit" value="Buat Pesanan"></div>
                     </div>
                 </form>
             </div>

@@ -29,8 +29,9 @@ html, body, * {
 }
 
 form {
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
+    text-align: center;
 }
 
 .checkId {
@@ -62,12 +63,14 @@ label.error {
     color: red;
     font-size: 1rem;
     display: block;
-    margin-top: 5px;
+    margin-top: 3px;
     border: 2px solid red;
     border-radius: 4px;
     line-height: 1;
     padding: 2px 0 6px 6px;
     background: #ffe6eb;
+    width: -webkit-fill-available;
+    text-align: center;
 }
 
 input.error {
@@ -80,3 +83,4 @@ input.valid{
     border: 2px solid #4CAF50;
     color: green;
 }
+

@@ -2,14 +2,14 @@ label.error {
     color: red;
     font-size: 1rem;
     display: block;
-    margin-top: 3px;
+    margin-top: 1px;
     border: 2px solid red;
     border-radius: 4px;
     line-height: 1;
     padding: 2px 0 6px 6px;
     background: #ffe6eb;
     width: -webkit-fill-available;
-    margin-bottom: 3px;
+    margin-bottom: 2em;
     text-align: center;
 }
 

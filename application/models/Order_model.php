@@ -30,4 +30,17 @@ class Order_model extends CI_Model
         $this->kupon = $post["kupon"];
         return $this->db->insert($this->_table, $this);
     }
+
+    public function order()
+    {
+        $post = $this->input->post();
+        $this->id_order = uniqid();
+        $this->no_hp = $post["no_hp"];
+        $this->nama = $post["nama"];
+        $this->alamat = $post["alamat"];
+        $this->jenis_barang = $post["jenis"];
+        $this->note = $post["note"];
+        $this->waktu_jemput = $post["waktu"];
+        return $this->db->insert($this->_table, $this);
+    }
 }

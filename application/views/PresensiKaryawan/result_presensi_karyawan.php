@@ -28,7 +28,7 @@
                     <input type="radio" name="hadir" id="izin" value="Izin">
                     <label for="izin" id="lizin">Izin</label>
                 </div>
-                <Button type="submit" class="checkId">Masuk</Button>
+                <Button type="submit" class="checkId">Submit</Button>
             </form>
         </div>
 

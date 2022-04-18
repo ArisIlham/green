@@ -39,12 +39,20 @@ class Welcome extends CI_Controller
 	public function dashboard()
 	{
 		$this->load->view('MemberGL/navigation', ["title" => "Dashboard Member"]);
-		$this->load->view('MemberGL/index', $this->session->userdata());
+		if ($this->session->userdata('id_member') == NULL) {
+			redirect(base_url('login'), 'location');
+		} else {
+			$this->load->view('MemberGL/index', $this->session->userdata());
+		}
 	}
 
 	public function orderMember()
 	{
 		$this->load->view('MemberGL/navigation', ["title" => "Order Laundry"]);
-		$this->load->view('MemberGL/Penjemputan_barang', $this->session->userdata());
+		if ($this->session->userdata('id_member') == NULL) {
+			redirect(base_url('login'), 'location');
+		} else {
+			$this->load->view('MemberGL/Penjemputan_barang', $this->session->userdata());
+		}
 	}
 }
