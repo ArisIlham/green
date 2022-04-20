@@ -96,6 +96,7 @@ CREATE TABLE `kupon` (
 
 LOCK TABLES `kupon` WRITE;
 /*!40000 ALTER TABLE `kupon` DISABLE KEYS */;
+INSERT INTO `kupon` VALUES ('6260264447080','HOLIDAY-APR','Special April Holiday','2022-04-22','Promo Special untuk 5 orang tercepat',2,10,1,5);
 /*!40000 ALTER TABLE `kupon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,13 +143,13 @@ DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `id_member` varchar(64) COLLATE utf8_bin NOT NULL,
   `no_hp` varchar(13) CHARACTER SET armscii8 NOT NULL,
-  `password` varchar(16) COLLATE utf8_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8_bin NOT NULL,
   `nama` mediumtext COLLATE utf8_bin NOT NULL,
   `alamat` mediumtext COLLATE utf8_bin NOT NULL,
   `foto` longblob DEFAULT NULL,
   `tier_member` int(11) NOT NULL,
-  `total_laundry` int(11) DEFAULT NULL,
-  `total_harga` int(11) DEFAULT NULL,
+  `total_laundry` int(64) DEFAULT NULL,
+  `total_harga` int(64) DEFAULT NULL,
   PRIMARY KEY (`id_member`),
   UNIQUE KEY `no_hp_UNIQUE` (`no_hp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -160,7 +161,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('6246592098554','0895604395176','ad','Ahmad Syafarudin','Pringsewu',NULL,1,NULL,NULL),('624e62ec53afe','0895604395177','asdasdasd','Ahmad Syafarudin','Pringsewu',NULL,1,NULL,NULL),('624e633a09a05','0895604395178','asdasdasd','Ahmad Syafarudin','Pringsewu',NULL,1,NULL,NULL),('624e63a7731e2','0895604395179','asdasdasdasd','Ahmad Syafarudin','Pringsewu',NULL,1,NULL,NULL),('624e6405d8255','0895604395190','12345678','Ahmad Syafarudin','Pringsewu',NULL,1,NULL,NULL),('625250c98fad1','089560439517','asdasdasd','Ahmad Syafarudin','Pringsewu',NULL,1,NULL,NULL),('625397da94d43','0895604395180','asdasdasd','adaa','Pringsewu',NULL,1,NULL,NULL);
+INSERT INTO `member` VALUES ('62599e8f18fe3','0895604395176','$2y$10$DdWOJy3/EQK6G40XrTfI9eS7EE.h33tASIoAL.8j7rpq0vqGKn.zm','Ahmad Syafarudin','Pringsewu',NULL,1,2,40000),('625e036c5e8dd','0895604395166','$2y$10$qyCDZMKW0nC.WgDYob3HCuXj/tvMtTVLCbzSyBLYi4F7V8xSSWpvi','Samlo Berutu','Jl. Sudirman, Pajaresuk',NULL,1,2,40000);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +186,7 @@ CREATE TABLE `order` (
   `harga` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_order`),
   KEY `id_member_order` (`id_member`),
-  CONSTRAINT `id_member_order` FOREIGN KEY (`id_member`) REFERENCES `member` (`id_member`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `id_member_order` FOREIGN KEY (`id_member`) REFERENCES `member` (`id_member`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -195,6 +196,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES ('625a5bbf4ea46','62599e8f18fe3','0895604395176','Ahmad Syafarudin','Pringsewu','aasd','','2022-04-16 13:01:00','Aku',1,20000),('625cb34e72a7d',NULL,'0895604395176','Ahmad Syafarudin','Pringsewu','aasd','a','2022-04-18 07:39:00',NULL,1,20000),('625d0d3208c6a','62599e8f18fe3','0895604395176','Ahmad Syafarudin','Pringsewu','aasd','','2022-04-18 14:03:00','Aku',1,20000),('625e03c8324cb','625e036c5e8dd','0895604395166','Samlo Berutu','Jl. Sudirman, Pajaresuk','Baju','','2022-04-19 07:35:00','Aku',2,40000);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +216,7 @@ CREATE TABLE `presensi` (
   `keterangan` mediumtext COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id_presensi`),
   KEY `id_karyawan` (`id_karyawan`),
-  CONSTRAINT `id_karyawan` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `id_karyawan` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -224,7 +226,7 @@ CREATE TABLE `presensi` (
 
 LOCK TABLES `presensi` WRITE;
 /*!40000 ALTER TABLE `presensi` DISABLE KEYS */;
-INSERT INTO `presensi` VALUES ('6257b886aefb3','GLE001','Ahmad','Izin','2022-04-14 13:01:17','Pening Oy'),('6257b886bd605','GLE002','Syafar','Tidak Hadir','2022-04-14 00:00:00',NULL),('6257b886cbb5d','GLE003','Udin','Hadir','2022-04-14 13:00:57',NULL);
+INSERT INTO `presensi` VALUES ('6257b886aefb3','GLE001','Ahmad','Izin','2022-04-14 13:01:17','Pening Oy'),('6257b886bd605','GLE002','Syafar','Tidak Hadir','2022-04-14 00:00:00',NULL),('6257b886cbb5d','GLE003','Udin','Hadir','2022-04-14 13:00:57',NULL),('6257cd5da0a35','GLE001','Ahmad','Izin','2022-04-14 16:48:57','Pening Oy'),('6257cd5da4d5a','GLE002','Syafar','Hadir','2022-04-14 16:46:52',NULL),('6257cd5da53bd','GLE003','Udin','Hadir','2022-04-14 16:30:53',NULL),('6259a49279fea','GLE001','Ahmad','Tidak Hadir','2022-04-16 00:00:00',NULL),('6259a4927e45f','GLE002','Syafar','Tidak Hadir','2022-04-16 00:00:00',NULL),('6259a4927ef98','GLE003','Udin','Tidak Hadir','2022-04-16 00:00:00',NULL),('6259f16f2868a','GLE001','Ahmad','Tidak Hadir','2022-04-16 00:00:00',NULL),('6259f16f2c844','GLE002','Syafar','Tidak Hadir','2022-04-16 00:00:00',NULL),('6259f16f2cc0e','GLE003','Udin','Tidak Hadir','2022-04-16 00:00:00',NULL),('625af6125fb79','GLE001','Ahmad','Tidak Hadir','2022-04-17 00:00:00',NULL),('625af6127d2a2','GLE002','Syafar','Tidak Hadir','2022-04-17 00:00:00',NULL),('625af6127e272','GLE003','Udin','Tidak Hadir','2022-04-17 00:00:00',NULL),('625b26d49bd5c','GLE001','Ahmad','Tidak Hadir','2022-04-17 00:00:00',NULL),('625b26d49d9a0','GLE002','Syafar','Tidak Hadir','2022-04-17 00:00:00',NULL),('625b26d49fd88','GLE003','Udin','Tidak Hadir','2022-04-17 00:00:00',NULL),('625b8bd93b6ca','GLE001','Ahmad','Tidak Hadir','2022-04-17 00:00:00',NULL),('625b8bd942258','GLE002','Syafar','Tidak Hadir','2022-04-17 00:00:00',NULL),('625b8bd944205','GLE003','Udin','Tidak Hadir','2022-04-17 00:00:00',NULL),('625cada82cf9b','GLE001','Ahmad','Tidak Hadir','2022-04-18 00:00:00',NULL),('625cada8309d6','GLE002','Syafar','Tidak Hadir','2022-04-18 00:00:00',NULL),('625cada830dab','GLE003','Udin','Tidak Hadir','2022-04-18 00:00:00',NULL),('625cadaf1119d','GLE001','Ahmad','Hadir','2022-04-18 14:30:48',NULL),('625cadaf1245c','GLE002','Syafar','Tidak Hadir','2022-04-18 00:00:00',NULL),('625cadaf1478a','GLE003','Udin','Tidak Hadir','2022-04-18 00:00:00',NULL),('625d997e2a1d8','GLE001','Ahmad','Hadir','2022-04-20 21:54:21',NULL),('625d997e5b0ed','GLE002','Syafar','Tidak Hadir','2022-04-19 00:00:00',NULL),('625d997e5bf88','GLE003','Udin','Tidak Hadir','2022-04-19 00:00:00',NULL);
 /*!40000 ALTER TABLE `presensi` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -237,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-14 13:23:43
+-- Dump completed on 2022-04-20 22:29:26
