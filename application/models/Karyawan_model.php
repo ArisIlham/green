@@ -25,7 +25,7 @@ class Karyawan_model extends CI_Model
     public function login()
     {
         $id = $this->input->post("idKaryawan");
-        $karyawan = $this->db->get_where($this->_table, ["id_karyawan" => $id])->result();
+        $karyawan = $this->db->get_where($this->_table, ["id_karyawan" => $id])->row();
 
         if ($karyawan ==  NULL) {
             return 'false';

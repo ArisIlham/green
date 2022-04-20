@@ -14,6 +14,11 @@
 <body>
     <div id="backGround">
         <div class="kotakPresensi">
+            <?php
+            if (isset($success)) {
+                echo "<p>Berhasil Presensi</p>";
+            }
+            ?>
             <h1 class="title">Presensi Karyawan Green Laundry</h1>
             <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/presensi_karyawan/employees.png" alt="" class="employeeImage">
             <!-- <img src="../asset/assets/img/presensi_karyawan/employees.png" class="employeeImage"><br></br> -->
@@ -34,7 +39,7 @@
         $.validator.addMethod("login", function(value, element) {
             let res = false;
             $.ajax({
-                url: "<?= base_url('Karyawan/login') ?>",
+                url: "<?= base_url('Karyawan/checkKaryawan') ?>",
                 type: "post",
                 async: false,
                 data: {

@@ -2,6 +2,7 @@
 
 class Member_model extends CI_Model
 {
+
     private $_table = "member";
 
     public $id_member;
@@ -49,7 +50,7 @@ class Member_model extends CI_Model
         $this->id_member = uniqid();
         $this->no_hp = $post["no_hp"];
         $this->nama = $post["nama"];
-        $this->password = $post["password"];
+        $this->password = password_hash($post["password"], PASSWORD_DEFAULT);
         $this->alamat = $post["alamat"];
         $this->tier_member = 1;
         return $this->db->insert($this->_table, $this);
@@ -66,16 +67,36 @@ class Member_model extends CI_Model
         }
     }
 
-    public function login()
+    public function checkPassword()
     {
         $no_hp = $this->input->post("no_hp");
         $password = $this->input->post("password");
-        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp, "password" => $password))->result();
+        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp))->row();
 
         if ($member ==  NULL) {
             return 'false';
+        } else if (password_verify($password, $member->password) == TRUE) {
+            return 'true';
         } else {
-            return $member;
+            return 'false';
         }
+    }
+
+
+    public function login()
+    {
+        $no_hp = $this->input->post("no_hp");
+        $member = $this->db->get_where($this->_table, array("no_hp" => $no_hp))->row();
+
+        return $member;
+    }
+
+    public function total($data)
+    {
+        $this->total_laundry = $data["total_laundry"];
+        $this->total_harga = $data["total_harga"];
+        $this->session->set_userdata("total_laundry", $this->total_laundry);
+        $this->session->set_userdata("total_harga", $this->total_harga);
+        $this->db->update($this->_table, array("total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
     }
 }

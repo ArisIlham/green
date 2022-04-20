@@ -5,6 +5,9 @@
         Halaman penjemputan barang
     </title>
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/style_pemesanan_customer.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/validation_order.css" rel="stylesheet" />
 </head>
 
 
@@ -27,8 +30,9 @@
                     <p>
                 </h2>
                 <div class="form">
-                    <form id="Penjemputan-form">
-                        <div class="form-group">
+                    <form id="order" action="<?= base_url('Member/order') ?>" method="POST">
+                        <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                        <div class="form-group1">
                             <label for="nama">Nama</label> <input id="nama" name="nama" type="text">
                         </div> <br>
                         <div class="form-group">
@@ -47,7 +51,7 @@
                             <label for="waktu">Waktu Penjemputan</label> <input type="datetime-local" id="waktu" name="waktu">
                         </div><br>
 
-                        <center><button class="btn-sm btn-block btn-wave col-md-4 btn-primary">Buat Pesanan</button></center>
+                        <center><button class="btn-sm btn-block btn-wave col-md-4 btn-primary" type="submit">Buat Pesanan</button></center>
                     </form>
                 </div>
             </div>
@@ -56,5 +60,55 @@
         <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
 </body>
+<script>
+    $(document).ready(function() {
+        $('#order').validate({
+            rules: {
+                nama: {
+                    required: true,
+                    minlength: 3
+                },
+                no_hp: {
+                    required: true,
+                    number: true,
+                    minlength: 12,
+                },
+                alamat: {
+                    required: true,
+                    minlength: 4
+                },
+                jenis: {
+                    required: true,
+                    minlength: 4
+                },
+                waktu: {
+                    required: true,
+                }
+            },
+            messages: {
+                nama: {
+                    required: "Masukkan Nama Anda",
+                    minlength: "Masukkan Nama dengan Benar"
+                },
+                no_hp: {
+                    required: "Masukkan Kontak Anda",
+                    minlength: "Masukkan Nomor HP dengan Benar",
+                    number: "Masukkan Nomor HP dengan Benar"
+                },
+                alamat: {
+                    required: "Masukkan Alamat Penjemputan",
+                    minlength: "Masukkan Alamat dengan Benar"
+                },
+                jenis: {
+                    required: "Masukkan Jenis Barang Laundry",
+                    minlength: "Masukkan Jenis Barang dengan Benar"
+                },
+                waktu: {
+                    required: "Masukkan Waktu Penjemputan"
+                },
+            }
+        })
+    })
+</script>
 
 </html>
