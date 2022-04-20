@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="<?php echo base_url('/asset/assets/');?>assets/img/hero-img.png" class="img-fluid" alt="">
+          <img src="<?php echo base_url('/asset/assets/');?>assets/img/home/bg.png" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="box">
-              <img src="<?php echo base_url('/asset/assets/');?>assets/img/values-1.png" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/asset/assets/');?>assets/img/home/intransit.png" class="img-fluid" alt="">
               <h3>Free Ongkir</h3>
               <p>Bebas ongkos antar - jemput selamanya untuk wilayah Kabupaten Pringsewu</p>
             </div>
@@ -82,7 +82,7 @@
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
             <div class="box">
-              <img src="<?php echo base_url('/asset/assets/');?>assets/img/values-2.png" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/asset/assets/');?>assets/img/home/bankcard.png" class="img-fluid" alt="">
               <h3>Promotions</h3>
               <p>Anda berhak mendapatkan berbagai promo menarik dari Green Laundry Express</p>
             </div>
@@ -90,7 +90,7 @@
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box">
-              <img src="<?php echo base_url('/asset/assets/');?>assets/img/values-3.png" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/asset/assets/');?>assets/img/home/Trophy.png" class="img-fluid" alt="">
               <h3>Reward</h3>
               <p>Anda berhak mengikuti event tahunan Green Laundry Express untuk mendapatkan berbagai hadiah menarik</p>
             </div>
