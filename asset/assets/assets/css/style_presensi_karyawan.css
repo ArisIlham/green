@@ -84,3 +84,8 @@ input.valid{
     color: green;
 }
 
+p {
+    background-color: springgreen;
+    width: 100%;
+    text-align: center;
+}
