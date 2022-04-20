@@ -21,5 +21,5 @@
 
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url('/asset/assets/');?>js/demo/datatables-demo.js"></script>
-
+    
 </body>

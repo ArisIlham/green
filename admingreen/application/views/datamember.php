@@ -2,13 +2,13 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Penjemputan</h1>
-<p class="mb-4">Data Tabel yang harus dijemput</a>.</p>
+<h1 class="h3 mb-2 text-gray-800">Member</h1>
+<p class="mb-4">Data Tabel Member yang Bergabung</a>.</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Tabel Penjemputan</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Tabel Member</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
