@@ -50,7 +50,7 @@
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 100px;
-    padding: 100px;
+    padding: 30px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     display: block;
 }
@@ -61,8 +61,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150px;
-
+    /* height: 150px; */
 }
 
 .order_total {
@@ -76,7 +75,7 @@
 }
 
 .membership_info {
-    margin-top: 100px;
+    margin-top: 300px;
 }
 
 .order_total {

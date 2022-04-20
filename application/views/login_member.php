@@ -20,7 +20,7 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header  mb-0">
-                        <h5 class="text-center">Login</h5>
+                        <h5 class="text-center">Login Member</h5>
                     </div>
                     <div class="card-body">
                         <form id="login" action="<?= base_url('Member/login') ?>" method="POST">
@@ -33,11 +33,12 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" id="password">
                             </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <div class="mb-3" style="display: flex; text-align:center; justify-content:center;">
+                                <p style="margin-right: 3px;">Belum Punya Akun?</p>
+                                <a href="<?= base_url('register') ?>">Daftar</a>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>

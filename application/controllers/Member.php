@@ -51,6 +51,7 @@ class Member extends CI_Controller
             "nama" => $member->login()->nama,
             "alamat" => $member->login()->alamat,
             "foto" => $member->login()->foto,
+            "tier_member" => $member->login()->tier_member,
             "total_laundry" => $member->login()->total_laundry,
             "total_harga" => $member->login()->total_harga
         );

@@ -44,11 +44,11 @@
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Anda" aria-describedby="emailHelp">
                             </div>
-                            <!-- <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                            </div> -->
-                            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submit-btn">Daftar</button>
+                            <div class="mb-3" style="display: flex; text-align:center; justify-content:center;">
+                                <p style="margin-right: 3px;">Sudah Punya Akun?</p>
+                                <a href="<?= base_url('login') ?>">Login</a>
+                            </div>
                         </form>
                     </div>
                 </div>
