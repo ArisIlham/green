@@ -9,12 +9,16 @@
     <meta name="author" content="" />
     <title><?= $title; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="<?php echo base_url('/asset/assets/'); ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/sb-admin-2.min.css" rel="stylesheet"> -->
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/styles.css" rel="stylesheet" />
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/profile_member_style.css" rel="stylesheet" />
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/validation.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="<?php echo base_url('/asset/assets/'); ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url('/asset/assets/'); ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -58,7 +62,7 @@
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 
                         </div>
-                        <a class="nav-link" href="history.html">
+                        <a class="nav-link" href="<?= base_url('member/history') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Histori
                         </a>
