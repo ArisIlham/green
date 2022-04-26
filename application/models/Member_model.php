@@ -99,4 +99,20 @@ class Member_model extends CI_Model
         $this->session->set_userdata("total_harga", $this->total_harga);
         $this->db->update($this->_table, array("total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
     }
+
+    public function editProfile($data)
+    {
+        $post = $this->input->post();
+        $this->foto = $data["foto"];
+        $this->nama = $post["nama"];
+        $this->alamat = $post["alamat"];
+        if ($this->foto == NULL) {
+            $this->db->update($this->_table, array("nama" => $this->nama, "alamat" => $this->alamat), array("id_member" => $data['id']));
+        } else {
+            $this->db->update($this->_table, array("foto" => $this->foto, "nama" => $this->nama, "alamat" => $this->alamat), array("id_member" =>  $data['id']));
+            $this->session->set_userdata("foto", $this->foto);
+        }
+        $this->session->set_userdata("nama", $this->nama);
+        $this->session->set_userdata("alamat", $this->alamat);
+    }
 }

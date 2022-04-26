@@ -7,7 +7,15 @@
         <div class="container">
             <div class="user_profile">
                 <div class="user_photo_profile">
-                    <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/presensi_karyawan/employees.png" alt="" class="user_photo">
+                    <?php
+                    if ($foto == NULL) {
+                    ?>
+                        <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/presensi_karyawan/employees.png" alt="" class="user_photo">
+                    <?php
+                    } else { ?>
+                        <img src="<?= base_url('/upload/avatar/' . $foto); ?>" alt="" class=" user_photo">
+                    <?php } ?>
+
                     <div class="user_level">
                         <h3 class="user_level_text"><?php if ($tier_member == 1) {
                                                         echo "Silver";
@@ -27,7 +35,7 @@
                     <p class="user_address"><?= $alamat; ?></p>
                 </div>
                 <div class="user_edit_button">
-                    <button class="edit_profile_btn"> Edit Profile</button>
+                    <button class="edit_profile_btn" onclick="location.href = `<?= base_url('Member/editProfile') ?>`"> Edit Profile</button>
                 </div>
             </div><br>
 

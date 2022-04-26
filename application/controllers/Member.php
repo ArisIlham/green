@@ -10,7 +10,7 @@ class Member extends CI_Controller
         $this->load->model('Order_model');
         $this->load->library('form_validation');
         $this->load->library('session');
-        $this->load->helper(['form', 'url']);
+        $this->load->helper(['form', 'url', 'file']);
     }
 
     public function register()
@@ -132,5 +132,43 @@ class Member extends CI_Controller
             $data = $order->detail($id_order);
             $this->load->view('MemberGL/Detail_history', $data);
         }
+    }
+
+    public function editProfile()
+    {
+        $this->load->view('MemberGL/navigation', ["title" => "Edit Profil"]);
+        if ($this->session->userdata('id_member') == NULL) {
+            redirect(base_url('login'), 'location');
+        } else {
+            $this->load->view('MemberGL/edit_profile', $this->session->userdata());
+        }
+    }
+
+    public function goEditProfile()
+    {
+        $this->load->helper('file');
+        $member = $this->Member_model;
+        $file_name = "foto-profil-" . $this->session->userdata('nama');
+
+        $config['upload_path']          = FCPATH . '/upload/avatar/';
+        $config['allowed_types']        = 'gif|jpg|jpeg|png';
+        $config['file_name']            = $file_name;
+        $config['overwrite']            = true;
+        $config['max_size']             = 2048;
+
+        $this->load->library('upload', $config);
+
+        if (file_exists($file_name)) {
+            delete_files(glob(FCPATH . "/upload/avatar/" . $file_name . ".*"));
+        }
+        $this->upload->do_upload('foto');
+        $uploaded_data = $this->upload->data();
+        $new_data = [
+            'id' => $this->session->userdata('id_member'),
+            'foto' => $uploaded_data['file_name'],
+        ];
+
+        $member->editProfile($new_data);
+        redirect(base_url('member/profile'), 'location');
     }
 }
