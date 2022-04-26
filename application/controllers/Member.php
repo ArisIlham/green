@@ -120,4 +120,17 @@ class Member extends CI_Controller
             $this->load->view('MemberGL/history', ["data" => $data]);
         }
     }
+
+    public function detail()
+    {
+        $this->load->view('MemberGL/navigation', ["title" => "Detail Pesanan"]);
+        if ($this->session->userdata('id_member') == NULL) {
+            redirect(base_url('login'), 'location');
+        } else {
+            $id_order = $this->uri->segment(3);
+            $order = $this->Order_model;
+            $data = $order->detail($id_order);
+            $this->load->view('MemberGL/Detail_history', $data);
+        }
+    }
 }

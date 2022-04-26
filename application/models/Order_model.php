@@ -15,6 +15,7 @@ class Order_model extends CI_Model
     public $kupon;
     public $berat;
     public $harga;
+    public $status;
 
     public function orderMember($id_member)
     {
@@ -28,6 +29,7 @@ class Order_model extends CI_Model
         $this->note = $post["note"];
         $this->waktu_jemput = $post["waktu"];
         $this->kupon = $post["kupon"];
+        $this->status = 2;
         return $this->db->insert($this->_table, $this);
     }
 
@@ -41,6 +43,7 @@ class Order_model extends CI_Model
         $this->jenis_barang = $post["jenis"];
         $this->note = $post["note"];
         $this->waktu_jemput = $post["waktu"];
+        $this->status = 2;
         return $this->db->insert($this->_table, $this);
     }
 
@@ -60,6 +63,12 @@ class Order_model extends CI_Model
     public function history($id_member)
     {
         $order = $this->db->get_where($this->_table, ["id_member" => $id_member])->result();
+        return $order;
+    }
+
+    public function detail($id_order)
+    {
+        $order = $this->db->get_where($this->_table, ["id_order" => $id_order])->row();
         return $order;
     }
 }

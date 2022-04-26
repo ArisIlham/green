@@ -28,7 +28,7 @@
                         foreach ($data as $row) {
                             $count = $count + 1;
                         ?>
-                            <tr>
+                            <tr onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
                                 <td><?php echo $row->nama ?></td>
                                 <td><?php echo $row->alamat ?></td>
                                 <td><?php echo $row->no_hp ?></td>

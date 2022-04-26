@@ -32,7 +32,7 @@
                     <div>
                         <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="kupon">Kupon</label>
                         <select id="kupon" name="kupon" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
-                            <option>Aku</option>
+                            <option>Discount 5%</option>
                         </select>
                     </div>
 
