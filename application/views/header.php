@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?php echo base_url('/asset/assets/');?>assets/img/favicon.png" rel="icon">
+  <link href="<?php echo base_url('/asset/assets/');?>assets/img/home/logo.png" rel="icon">
   <link href="<?php echo base_url('/asset/assets/');?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -48,6 +48,7 @@
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
+
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="<?php echo base_url("Welcome/member/")?>">Get Started</a></li>
         </ul>
