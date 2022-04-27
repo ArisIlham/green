@@ -20,6 +20,14 @@
                     </div>
                 </div>
             </div>
+            <div class="Kupon" style="background: #43A047; width: 400px; height: auto;">
+            <div>
+                 </div><img src="assets/img/kupon.png" style="background: #43A047; width:100px; height: 90px; float: left;" >
+                 <h5 >Promo Spesial Ramadhan! </h5>
+                 <h2 >Diskon 20 %</h2> 
+                 <p class="expire" >Expired: 20 Agustus 2022</p>
+                 <center><button style="background: #4CAF50; border-color: green;">Klaim</button></center>
+             </div>
     </main>
 
     <footer class="py-4 bg-light mt-auto">
