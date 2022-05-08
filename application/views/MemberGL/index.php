@@ -46,7 +46,7 @@
                     <div style="display: flex;">
                     <?php
                 } ?>
-                    <?php if ($row->masa_berlaku >= date("Y-m-d") && $row->tier_kupon == $tier_member || $row->id_member == $id_member) { ?>
+                    <?php if ($row->masa_berlaku >= date("Y-m-d") && $row->tier_kupon == $tier_member || $row->masa_berlaku >= date("Y-m-d") && $row->id_member == $id_member) { ?>
                         <form id="kupon" action="<?= base_url('Member/addKupon') ?>" method="POST">
                             <input id="gg" type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <input type="hidden" name="id_kupon" id="id_kupon" value="<?= $row->id_kupon ?>">
@@ -58,8 +58,11 @@
                                     <h6 style="color:wheat;">Minimal Laundry <?= $row->min_laundry ?>kg</h6>
                                     <p class="expire" style="color:yellow">Expired: <?= $row->masa_berlaku ?></p>
                                 </div>
-                                <div style="display: flex; padding-left: 10px; padding-right: 10px; justify-content: center; align-items: center; border-left: 2px dashed; border-color: white;">
-                                    <center><button style="background: orange; border-color: white; color: white; border: 1px solid;" id="<?= $row->id_kupon ?>" type="submit">Klaim</button></center>
+                                <div style="display: flex; padding-left: 10px; padding-right: 10px; justify-content: center; align-items: center; border-left: 2px dashed; border-color: white; width:30%;">
+                                    <div>
+                                        <center><button style="background: orange; border-color: white; color: white; border: 1px solid;" id="<?= $row->id_kupon ?>" type="submit">Klaim</button></center>
+                                        <p style="color:white; font-size:small; text-align:center;">Sisa: <?= $row->jumlah_klaim ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -94,10 +97,16 @@
             foreach ($kupon_member as $row2) {
                 if ($row->id_kupon === $row2->id_kupon) {
         ?>
-                    $('#'.concat('<?= $row->id_kupon; ?>')).prop('disabled', true);
+
+                    $('#'.concat('<?= $row->id_kupon ?>')).prop('disabled', true);
                     $('#'.concat('<?= $row->id_kupon; ?>')).css('background-color', 'grey');
-        <?php }
+                <?php }
             }
+            if ($row->jumlah_klaim == 0) {
+                ?>
+                $('#'.concat('<?= $row->id_kupon ?>')).prop('disabled', true);
+                $('#'.concat('<?= $row->id_kupon; ?>')).css('background-color', 'grey');
+        <?php }
         } ?>
     })
 </script>

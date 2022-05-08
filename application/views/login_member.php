@@ -41,9 +41,12 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">Login</button>
-                            <div class="mb-3" style="display: flex; text-align:center; justify-content:center;">
+                            <div style="display: flex; text-align:center; justify-content:center;">
                                 <p style="margin-right: 3px;">Belum Punya Akun?</p>
                                 <a href="<?= base_url('register') ?>">Daftar</a>
+                            </div>
+                            <div style="display: flex; text-align:center; justify-content:center;">
+                                <a href="<?= base_url('Member/editPassword') ?>">Lupa Password?</a>
                             </div>
                         </form>
                     </div>

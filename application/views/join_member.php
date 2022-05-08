@@ -64,9 +64,6 @@
                                 <p style="margin-right: 3px;">Sudah Punya Akun?</p>
                                 <a href="<?= base_url('login') ?>">Login</a>
                             </div>
-                            <div style="display: flex; text-align:center; justify-content:center;">
-                                <a href="<?= base_url('Member/editPassword') ?>">Lupa Password?</a>
-                            </div>
                         </form>
                     </div>
                 </div>

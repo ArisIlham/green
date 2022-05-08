@@ -21,7 +21,10 @@ class Kupon_model extends CI_Model
 
     public function getKupon($id_kupon)
     {
-        return $this->db->get_where($this->_table, ["id_kupon" => $id_kupon])->row();
+        $res =  $this->db->get_where($this->_table, ["id_kupon" => $id_kupon])->row();
+        $klaim = $res->jumlah_klaim - 1;
+        $this->db->update($this->_table, ["jumlah_klaim" => $klaim], ["id_kupon" => $id_kupon]);
+        return $res;
     }
 
     public function addKupon($tanggal_join, $id_member)
@@ -34,7 +37,7 @@ class Kupon_model extends CI_Model
         $this->min_laundry = 0;
         $this->persentase_diskon = 10;
         $this->tier_kupon = 0;
-        $this->jumlah_klaim = -1;
+        $this->jumlah_klaim = 1;
         $this->id_member = $id_member;
         $this->db->insert($this->_table, $this);
     }
