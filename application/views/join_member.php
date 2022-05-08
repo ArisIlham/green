@@ -30,6 +30,10 @@
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Anda" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
+                                <label for="nama" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan Nama Anda" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
                                 <label for="no_hp" class="form-label">Nomor HP</label>
                                 <input type="text" class="form-control" id="no_hp" placeholder="Masukkan No HP Anda" name="no_hp">
                             </div>
@@ -130,6 +134,10 @@
                 nama: {
                     required: true,
                     minlength: 3,
+                },
+                tanggal_lahir: {
+                    required: true,
+                    date: true,
                 },
                 no_hp: {
                     required: true,

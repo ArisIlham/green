@@ -22,7 +22,8 @@ class Member extends CI_Controller
         $validation->set_rules($member->rules());
 
         if ($validation->run()) {
-            $member->newMember();
+            date_default_timezone_set("Asia/Jakarta");
+            $this->Kupon_model->addKupon(date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))), $member->newMember());
             redirect(base_url('login'), 'location');
         } else {
             redirect(base_url('register'), 'location');
@@ -76,8 +77,17 @@ class Member extends CI_Controller
         if ($this->input->post("kupon") != "") {
             $this->kuponMember_model->terpakai($this->input->post("kupon"));
         }
+        redirect(base_url('Member/proses'), "location");
     }
-
+    public function proses()
+    {
+        $this->load->view('MemberGL/navigation', ["title" => "Order Laundry"]);
+        if ($this->session->userdata('id_member') == NULL) {
+            redirect(base_url('login'), 'location');
+        } else {
+            $this->load->view('MemberGL/proses_penjemputan', $this->session->userdata());
+        }
+    }
     public function order()
     {
         $order = $this->Order_model;
@@ -100,7 +110,7 @@ class Member extends CI_Controller
             $total_kupon = $order->total($this->session->userdata('id_member'))["total_kupon"];
             $this->session->set_userdata("total_kupon", $total_kupon);
             $member->total(array("id_member" => $this->session->userdata('id_member'), "total_laundry" => $total_laundry, "total_harga" => $total_harga));
-            $kupon = $this->Kupon_model->kupon($this->session->userdata("tier_member"));
+            $kupon = $this->Kupon_model->kupon();
             $this->session->set_userdata("kupon", $kupon);
             $this->load->view('MemberGL/index', $this->session->userdata());
         }

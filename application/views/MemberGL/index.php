@@ -30,7 +30,7 @@
                     <div style="display: flex;">
                     <?php
                 } ?>
-                    <?php if ($row->masa_berlaku >= date("Y-m-d")) { ?>
+                    <?php if ($row->masa_berlaku >= date("Y-m-d") && $row->tier_kupon == $tier_member || $row->id_member == $id_member) { ?>
                         <form id="kupon" action="<?= base_url('Member/addKupon') ?>" method="POST">
                             <input id="gg" type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <input type="hidden" name="id_kupon" id="id_kupon" value="<?= $row->id_kupon ?>">

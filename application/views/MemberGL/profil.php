@@ -10,7 +10,7 @@
                     <?php
                     if ($foto == NULL) {
                     ?>
-                        <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/presensi_karyawan/employees.png" alt="" class="user_photo">
+                        <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/new-account.png" alt="" class="user_photo">
                     <?php
                     } else { ?>
                         <img src="<?= base_url('/upload/avatar/' . $foto); ?>" alt="" class=" user_photo">
