@@ -32,7 +32,19 @@
                     <div>
                         <label style="float: left; margin-top: -22px;padding: 2px; font-size: 14px;" for="kupon">Kupon</label>
                         <select id="kupon" name="kupon" style=" font-family: 'Roboto', sans-serif; outline: 0; background: #f2f2f2; width: 100%; border: 0;margin: 0 0 15px;padding: 10px; box-sizing: border-box;font-size: 14px;">
-                            <option>Discount 5%</option>
+                            <option value="">-- Pilih Kupon --</option>
+                            <?php
+                            date_default_timezone_set("Asia/Jakarta");
+                            foreach ($kupon as $row) {
+                                foreach ($kupon_member as $row2) {
+                                    if ($row->id_kupon === $row2->id_kupon && $row2->terpakai == 0 && $row2->masa_berlaku >= date("Y-m-d")) {
+
+                            ?>
+                                        <option value="<?= $row2->kode_kupon ?>"><?= $row->judul_kupon ?></option>
+                            <?php
+                                    }
+                                }
+                            } ?>
                         </select>
                     </div>
 
@@ -61,13 +73,13 @@
 </div>
 </div>
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="js/datatables-simple-demo.js"></script>
 
 </body>
 <script>

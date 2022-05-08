@@ -66,6 +66,16 @@ class Member_model extends CI_Model
             return 'false';
         }
     }
+    public function editHP()
+    {
+        $no_hp = $this->input->post("no_hp");
+        $check = $this->db->get_where($this->_table, ["no_hp" => $no_hp])->row();
+        if ($check == NULL || $check->no_hp === $no_hp) {
+            return 'true';
+        } else {
+            return 'false';
+        }
+    }
 
     public function checkPassword()
     {
@@ -97,7 +107,16 @@ class Member_model extends CI_Model
         $this->total_harga = $data["total_harga"];
         $this->session->set_userdata("total_laundry", $this->total_laundry);
         $this->session->set_userdata("total_harga", $this->total_harga);
-        $this->db->update($this->_table, array("total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
+        if ($this->total_laundry >= 25 && $this->total_laundry < 60) {
+            $this->db->update($this->_table, array("tier_member" => 2, "total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
+            $this->session->set_userdata("tier_member", 2);
+        } else if ($this->total_laundry >= 60) {
+            $this->db->update($this->_table, array("tier_member" => 3, "total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
+            $this->session->set_userdata("tier_member", 3);
+        } else {
+            $this->db->update($this->_table, array("tier_member" => 1, "total_laundry" => $this->total_laundry, "total_harga" => $this->total_harga), array("id_member" => $data["id_member"]));
+            $this->session->set_userdata("tier_member", 1);
+        }
     }
 
     public function editProfile($data)
@@ -106,13 +125,15 @@ class Member_model extends CI_Model
         $this->foto = $data["foto"];
         $this->nama = $post["nama"];
         $this->alamat = $post["alamat"];
+        $this->no_hp = $post["no_hp"];
         if ($this->foto == NULL) {
-            $this->db->update($this->_table, array("nama" => $this->nama, "alamat" => $this->alamat), array("id_member" => $data['id']));
+            $this->db->update($this->_table, array("nama" => $this->nama, "alamat" => $this->alamat, "no_hp" => $this->no_hp), array("id_member" => $data['id']));
         } else {
-            $this->db->update($this->_table, array("foto" => $this->foto, "nama" => $this->nama, "alamat" => $this->alamat), array("id_member" =>  $data['id']));
+            $this->db->update($this->_table, array("foto" => $this->foto, "nama" => $this->nama, "alamat" => $this->alamat, "no_hp" => $this->no_hp), array("id_member" =>  $data['id']));
             $this->session->set_userdata("foto", $this->foto);
         }
         $this->session->set_userdata("nama", $this->nama);
         $this->session->set_userdata("alamat", $this->alamat);
+        $this->session->set_userdata("no_hp", $this->no_hp);
     }
 }

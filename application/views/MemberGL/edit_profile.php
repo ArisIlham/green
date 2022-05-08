@@ -35,11 +35,15 @@
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Anda" value="<?= $nama; ?>">
                             </div>
                             <div class="mb-3">
+                                <label for="no_hp" class="form-label">Nomor HP</label>
+                                <input type="text" class="form-control" id="no_hp" placeholder="Masukkan No HP Anda" name="no_hp" value="<?= $no_hp; ?>">
+                            </div>
+                            <div class=" mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Anda" value="<?= $alamat; ?>">
                             </div>
                             <button type="submit" class="btn btn-primary" id="submit-btn">Simpan</button>
-                            <button type="submit" class="btn btn-danger" id="cancel-btn">Batal</button>
+                            <a href="<?= base_url('member/profile') ?>" class="btn btn-danger" id="cancel-btn">Batal</a>
                         </form>
                     </div>
                 </div>
@@ -53,6 +57,34 @@
         let csrfName = $('.txt_csrfname').attr('name');
         let csrfHash = $('.txt_csrfname').val();
 
+        $.validator.addMethod("uniqeHP", function(value, element) {
+            let res = false;
+            $.ajax({
+                url: "<?= base_url('Member/editHP') ?>",
+                type: "post",
+                async: false,
+                data: {
+                    no_hp: function() {
+                        return $("#no_hp").val();
+                    },
+                    [csrfName]: csrfHash
+                },
+                dataType: 'json',
+                success: function(data) {
+
+                    csrfHash = data.csrfHash;
+                    $('.txt_csrfname').val(data.csrfHash);
+
+                    if (data.member == "true") {
+                        res = true;
+                    } else {
+                        res = false;
+                    }
+                }
+            })
+            return res;
+        }, "");
+
         $.validator.addMethod('filesize', function(value, element, param) {
             return this.optional(element) || (element.files[0].size <= param * 1000000)
         }, 'Maksimal Ukuran File Foto {0} MB');
@@ -63,8 +95,14 @@
                     required: true,
                     minlength: 3,
                 },
+                no_hp: {
+                    required: true,
+                    number: true,
+                    minlength: 12,
+                    uniqeHP: true
+                },
                 foto: {
-                    extension: "gif|jpeg|jpg",
+                    extension: "gif|jpeg|jpg|png",
                     filesize: 2
                 },
                 alamat: {
@@ -75,6 +113,12 @@
                 nama: {
                     required: "Mohon Masukan Nama Anda",
                     minlength: "Nama Minimal 3 Karakter"
+                },
+                no_hp: {
+                    required: "Mohon Masukan Nomor HP Anda",
+                    number: "Mohon Masukan Nomor HP dengan Benar",
+                    minlength: "Nomor HP Minimal 12 Angka",
+                    uniqeHP: "Nomor HP Sudah Terdaftar"
                 },
                 foto: {
                     extension: "Format Foto tidak Didukung"

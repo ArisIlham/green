@@ -20,14 +20,39 @@
                     </div>
                 </div>
             </div>
-            <div class="Kupon" style="background: #43A047; width: 400px; height: auto;">
-            <div>
-                 </div><img src="assets/img/kupon.png" style="background: #43A047; width:100px; height: 90px; float: left;" >
-                 <h5 >Promo Spesial Ramadhan! </h5>
-                 <h2 >Diskon 20 %</h2> 
-                 <p class="expire" >Expired: 20 Agustus 2022</p>
-                 <center><button style="background: #4CAF50; border-color: green;">Klaim</button></center>
-             </div>
+            <h1>Promo Khusus Untuk Anda</h1>
+
+
+            <?php $count = 0;
+            date_default_timezone_set("Asia/Jakarta");
+            foreach ($kupon as $row) {
+                if ($count % 2 == 0) { ?>
+                    <div style="display: flex;">
+                    <?php
+                } ?>
+                    <?php if ($row->masa_berlaku >= date("Y-m-d")) { ?>
+                        <form id="kupon" action="<?= base_url('Member/addKupon') ?>" method="POST">
+                            <input id="gg" type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                            <input type="hidden" name="id_kupon" id="id_kupon" value="<?= $row->id_kupon ?>">
+                            <div class="Kupon" style="background: #43A047; width: 400px; height: auto; display:flex; margin-top: 5px; margin-left: 10px;">
+                                <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/kupon.png" style=" margin: auto; background: #43A047; width:100px; height: 90px; float: left;">
+                                <div style="margin-top: 13px;">
+                                    <h5 style="color:#eeeeee;"><?= $row->judul_kupon ?></h5>
+                                    <h2 style="color:#f0c70a;">Diskon <?= $row->persentase_diskon ?>%</h2>
+                                    <h6 style="color:wheat;">Minimal Laundry <?= $row->min_laundry ?>kg</h6>
+                                    <p class="expire" style="color:yellow">Expired: <?= $row->masa_berlaku ?></p>
+                                </div>
+                                <div style="display: flex; padding-left: 10px; padding-right: 10px; justify-content: center; align-items: center; border-left: 2px dashed; border-color: white;">
+                                    <center><button style="background: orange; border-color: white; color: white; border: 1px solid;" id="<?= $row->id_kupon ?>" type="submit">Klaim</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    <?php } ?>
+                    <?php if ($count % 2 != 0) { ?>
+                    </div>
+            <?php }
+                    $count += 1;
+                } ?>
     </main>
 
     <footer class="py-4 bg-light mt-auto">
@@ -46,12 +71,20 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+<script>
+    $(document).ready(function() {
+
+        <?php foreach ($kupon as $row) {
+            foreach ($kupon_member as $row2) {
+                if ($row->id_kupon === $row2->id_kupon) {
+        ?>
+                    $('#'.concat('<?= $row->id_kupon; ?>')).prop('disabled', true);
+                    $('#'.concat('<?= $row->id_kupon; ?>')).css('background-color', 'grey');
+        <?php }
+            }
+        } ?>
+    })
+</script>
 </body>
 
 </html>

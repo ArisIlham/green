@@ -1,3 +1,21 @@
+#dataTable td, #dataTable th {
+  border: 1px solid #ddd;
+  /* padding: 8px; */
+}
+
+#dataTable tr:nth-child(odd){background-color: #f2f2f2;}
+
+#dataTable tr:hover {background-color: #43a047; color: white;}
+
+#dataTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
 .container {
     display: inline;
 }
@@ -14,23 +32,58 @@
     justify-content: center;
 }
 .user_photo_profile{
-    float: left;
-    width: 25%;
+  float: left;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .user_photo {
-    border-radius: 50%;
-    height: 120px;
-    width: 120px;
+  border-radius: 50%;
+  height: 75%;
+  width: 75%;
+  margin-bottom: 5px;
 }
 
-.user_level {
-    height: 25px;
-    width: 100px;
-    background-color: beige;
+.user_level_platinum {
+    height: 30%;
+    width: 75%;
+    /* background-color: beige; */
     display: flex;
     align-items: center;
     justify-content: center;
+  background: linear-gradient(to right, #E5E4E2, #f3f3f3, #E5E4E2);
+    /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #E5E4E2), color-stop(100%, #D6D5D3)); */
+    border-radius: 30px;
+    padding: 3px;
+}
+
+.user_level_silver {
+  height: 30%;
+  width: 75%;
+  /* background-color: beige; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #9c9a9a, #C0C0C0, #9c9a9a);
+
+  /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #C0C0C0), color-stop(100%, #B1B1B1)); */
+  border-radius: 30px;
+  padding: 3px;
+}
+
+.user_level_gold {
+  height: 30%;
+  width: 75%;
+  /* background-color: beige; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+  border-radius: 30px;
+  padding: 3px;
 }
 
 .user_bio {
@@ -5051,8 +5104,8 @@ textarea.form-control-lg {
 .page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
   z-index: 3;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #43a047;
+  border-color: #43a047;
 }
 .page-item.disabled .page-link, .page-item.disabled .dataTable-pagination a, .dataTable-pagination .page-item.disabled a, .dataTable-pagination li.disabled .page-link, .dataTable-pagination li.disabled a {
   color: #6c757d;

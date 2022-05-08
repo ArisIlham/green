@@ -16,16 +16,22 @@
                         <img src="<?= base_url('/upload/avatar/' . $foto); ?>" alt="" class=" user_photo">
                     <?php } ?>
 
-                    <div class="user_level">
-                        <h3 class="user_level_text"><?php if ($tier_member == 1) {
-                                                        echo "Silver";
-                                                    } else if ($tier_member == 2) {
-                                                        echo "Gold";
-                                                    } else {
-                                                        echo "Platinum";
-                                                    } ?>
-                        </h3>
-                    </div>
+
+                    <?php if ($tier_member == 1) { ?>
+                        <div class="user_level_silver">
+                            <h3 class="user_level_text" style="padding-top: 3px;"><?= "Silver"; ?></h3>
+                        </div>
+                    <?php } else if ($tier_member == 2) { ?>
+                        <div class="user_level_gold">
+                            <h3 class="user_level_text" style="padding-top: 3px;"><?= "Gold"; ?></h3>
+                        </div>
+                    <?php } else { ?>
+                        <div class="user_level_platinum">
+                            <h3 class="user_level_text" style="padding-top: 3px;"><?= "Platinum"; ?></h3>
+                        </div>
+                    <?php } ?>
+
+
                 </div>
                 <div class="user_bio">
                     <h1 class="user_name"><?= $nama; ?></h1>
@@ -54,7 +60,7 @@
                 </div>
                 <div class="kupon">
                     <div class="kupon_sum_div">
-                        <h1 class="kupon_sum">10</h1>
+                        <h1 class="kupon_sum"><?= $total_kupon ?></h1>
                     </div>
                     <div class="total_pesanan_div">
                         <div>
