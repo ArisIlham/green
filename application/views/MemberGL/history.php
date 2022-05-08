@@ -25,7 +25,7 @@
                     <tbody>
                         <?php
                         $count = 0;
-                        foreach ($data as $row) {
+                        foreach ($order as $row) {
                             $count = $count + 1;
                         ?>
                             <tr onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">

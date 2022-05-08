@@ -42,6 +42,18 @@ class Member extends CI_Controller
         $res = array('csrfName' => $this->security->get_csrf_token_name(), 'csrfHash' => $this->security->get_csrf_hash(), 'member' => $member->editHP());
         echo json_encode($res);
     }
+    public function checkHP()
+    {
+        $member = $this->Member_model;
+        $res = array('csrfName' => $this->security->get_csrf_token_name(), 'csrfHash' => $this->security->get_csrf_hash(), 'member' => $member->checkHP());
+        echo json_encode($res);
+    }
+    public function checkTgl()
+    {
+        $member = $this->Member_model;
+        $res = array('csrfName' => $this->security->get_csrf_token_name(), 'csrfHash' => $this->security->get_csrf_hash(), 'member' => $member->checkTgl());
+        echo json_encode($res);
+    }
 
     public function password()
     {
@@ -62,7 +74,8 @@ class Member extends CI_Controller
             "foto" => $member->login()->foto,
             "tier_member" => $member->login()->tier_member,
             "total_laundry" => $member->login()->total_laundry,
-            "total_harga" => $member->login()->total_harga
+            "total_harga" => $member->login()->total_harga,
+            "tanggal_lahir" => $member->login()->tanggal_lahir
         );
         $this->session->set_userdata($data);
         $res = array('member' => $member->login());
@@ -112,6 +125,9 @@ class Member extends CI_Controller
             $member->total(array("id_member" => $this->session->userdata('id_member'), "total_laundry" => $total_laundry, "total_harga" => $total_harga));
             $kupon = $this->Kupon_model->kupon();
             $this->session->set_userdata("kupon", $kupon);
+            $order = $this->Order_model;
+            $data = $order->history($this->session->userdata('id_member'));
+            $this->session->set_userdata("order", $data);
             $this->load->view('MemberGL/index', $this->session->userdata());
         }
     }
@@ -142,9 +158,7 @@ class Member extends CI_Controller
         if ($this->session->userdata('id_member') == NULL) {
             redirect(base_url('login'), 'location');
         } else {
-            $order = $this->Order_model;
-            $data = $order->history($this->session->userdata('id_member'));
-            $this->load->view('MemberGL/history', ["data" => $data]);
+            $this->load->view('MemberGL/history', $this->session->userdata());
         }
     }
 
@@ -175,7 +189,7 @@ class Member extends CI_Controller
     {
         $this->load->helper('file');
         $member = $this->Member_model;
-        $file_name = "foto-profil-" . $this->session->userdata('nama');
+        $file_name = "foto-profil-" . $this->session->userdata('nama') . "_" . $this->session->userdata("id_member");
 
         $config['upload_path']          = FCPATH . '/upload/avatar/';
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
@@ -235,5 +249,25 @@ class Member extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(base_url('/'), "location");
+    }
+
+    public function editPassword()
+    {
+        if ($this->session->userdata('id_member') == NULL) {
+            $this->load->view('MemberGL/edit_password_0');
+        } else {
+            $this->load->view('MemberGL/navigation', ["title" => "Edit Password"]);
+            $this->load->view('MemberGL/edit_password', $this->session->userdata());
+        }
+    }
+
+    public function goEditPassword()
+    {
+        $this->Member_model->editPassword();
+        if ($this->session->userdata('id_member') == NULL) {
+            redirect(base_url('login'), 'location');
+        } else {
+            redirect(base_url('member/profile'), 'location');
+        }
     }
 }

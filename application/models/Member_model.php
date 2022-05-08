@@ -84,6 +84,28 @@ class Member_model extends CI_Model
         }
     }
 
+    public function checkHP()
+    {
+        $no_hp = $this->input->post("no_hp");
+        $check = $this->db->get_where($this->_table, ["no_hp" => $no_hp])->row();
+        if ($check == NULL) {
+            return 'false';
+        } else {
+            return 'true';
+        }
+    }
+    public function checkTgl()
+    {
+        $no_hp = $this->input->post("no_hp");
+        $tgl = $this->input->post("tanggal_lahir");
+        $check = $this->db->get_where($this->_table, ["no_hp" => $no_hp, "tanggal_lahir" => $tgl])->row();
+        if ($check == NULL) {
+            return 'false';
+        } else {
+            return 'true';
+        }
+    }
+
     public function checkPassword()
     {
         $no_hp = $this->input->post("no_hp");
@@ -142,5 +164,12 @@ class Member_model extends CI_Model
         $this->session->set_userdata("nama", $this->nama);
         $this->session->set_userdata("alamat", $this->alamat);
         $this->session->set_userdata("no_hp", $this->no_hp);
+    }
+
+    public function editPassword()
+    {
+        $this->no_hp = $this->input->post("no_hp");
+        $this->password = password_hash($this->input->post("password"), PASSWORD_DEFAULT);
+        $this->db->update($this->_table, ["password" => $this->password], ["no_hp" => $this->no_hp]);
     }
 }

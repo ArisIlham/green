@@ -40,8 +40,15 @@
                     <h3 class="address_tittle"> Alamat</h3>
                     <p class="user_address"><?= $alamat; ?></p>
                 </div>
-                <div class="user_edit_button">
-                    <button class="edit_profile_btn" onclick="location.href = `<?= base_url('Member/editProfile') ?>`"> Edit Profile</button>
+                <div>
+                    <div class="user_edit_button">
+                        <button class="edit_profile_btn" onclick="location.href = `<?= base_url('Member/editProfile') ?>`"> Edit Profile</button>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="user_edit_button">
+                        <button class="edit_profile_btn" onclick="location.href = `<?= base_url('Member/editPassword') ?>`">Ubah Password</button>
+                    </div>
                 </div>
             </div><br>
 

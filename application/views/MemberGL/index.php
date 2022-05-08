@@ -12,11 +12,27 @@
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-white mb-4">
-                        <div class="card-body">Status Pesanan</div>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View Details</a>
-                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                        </div>
+                        <div class="card-body">Pesanan Berlangsung</div>
+                        <?php foreach ($order as $row) {
+                            if ($row->status == 2) {
+                        ?>
+                                <div class="card-footer d-flex align-items-center justify-content-between" onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
+                                    <div>
+                                        <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= $row->jenis_barang ?></p>
+                                        <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= "(" . $row->waktu_jemput . ")" ?></p>
+                                    </div>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            <?php } else {
+                            ?>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <p class="small text-white stretched-link" style="margin-bottom:1px;">Tidak Ada Pesanan</p>
+                                    </div>
+                                </div>
+                        <?php }
+                        } ?>
+
                     </div>
                 </div>
             </div>
@@ -36,7 +52,7 @@
                             <input type="hidden" name="id_kupon" id="id_kupon" value="<?= $row->id_kupon ?>">
                             <div class="Kupon" style="background: #43A047; width: 400px; height: auto; display:flex; margin-top: 5px; margin-left: 10px;">
                                 <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/kupon.png" style=" margin: auto; background: #43A047; width:100px; height: 90px; float: left;">
-                                <div style="margin-top: 13px;">
+                                <div style="margin-top: 13px; padding: 7px;">
                                     <h5 style="color:#eeeeee;"><?= $row->judul_kupon ?></h5>
                                     <h2 style="color:#f0c70a;">Diskon <?= $row->persentase_diskon ?>%</h2>
                                     <h6 style="color:wheat;">Minimal Laundry <?= $row->min_laundry ?>kg</h6>
