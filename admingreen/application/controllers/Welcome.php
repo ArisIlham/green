@@ -163,12 +163,12 @@ class Welcome extends CI_Controller
 		$this->load->view('persentasi', $data);
 		$this->load->view('footer');
 	}
-	public function print()
+	public function print_penjemputan()
 	{
 		$data['penjemputan'] = $this->m_admin->tampil_penjemputan('order');
 		$this->load->view('print_penjemputan', $data);
 	}
-	public function excel()
+	public function excel_penjemputan()
 	{
 		$data['penjemputan'] = $this->m_admin->tampil_penjemputan('order');
 		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
@@ -210,6 +210,108 @@ class Welcome extends CI_Controller
 		$filename="Data_Orderan".'.xlsx';
 
 		$object->getActiveSheet()->setTitle("Data Orderan");
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+		header('Content-Disposition: attachment;filename="'.$filename. '"');
+
+		header('Cache-Control: max-age=0');
+
+		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+		exit;
+	}
+	public function print_member()
+	{
+		$data['member'] = $this->m_admin->tampil_datamember('member');
+		$this->load->view('print_member', $data);
+	}
+	public function excel_member()
+	{
+		$data['member'] = $this->m_admin->tampil_datamember('member');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		$object = new PHPexcel();
+
+		$object->getProperties()->setCreator("Green Laundry");
+		$object->getProperties()->setLastModifiedBy("Green Laundry");
+		$object->getProperties()->setTitle("Data Member");
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1', 'NO');
+		$object->getActiveSheet()->setCellValue('B1', 'ID Member');
+		$object->getActiveSheet()->setCellValue('C1', 'NO HP');
+		$object->getActiveSheet()->setCellValue('D1', 'Nama');
+		$object->getActiveSheet()->setCellValue('E1', 'Alamat');
+		$object->getActiveSheet()->setCellValue('F1', 'Foto');
+		$object->getActiveSheet()->setCellValue('G1', 'Tier Member');
+		$object->getActiveSheet()->setCellValue('H1', 'Total Laundry');
+		$object->getActiveSheet()->setCellValue('I1', 'Total Belanja');
+
+		$baris = 2;
+		$no = 1;
+		foreach($data['member'] as $pjm){
+			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+			$object->getActiveSheet()->setCellValue('B'.$baris, $pjm->id_member);
+			$object->getActiveSheet()->setCellValue('C'.$baris, $pjm->no_hp);
+			$object->getActiveSheet()->setCellValue('D'.$baris, $pjm->nama);
+			$object->getActiveSheet()->setCellValue('E'.$baris, $pjm->alamat);
+			$object->getActiveSheet()->setCellValue('F'.$baris, $pjm->foto);
+			$object->getActiveSheet()->setCellValue('G'.$baris, $pjm->tier_member);
+			$object->getActiveSheet()->setCellValue('H'.$baris, $pjm->total_laundry);
+			$object->getActiveSheet()->setCellValue('I'.$baris, $pjm->total_harga);
+			$baris++;
+		}
+		$filename="Data_Member".'.xlsx';
+
+		$object->getActiveSheet()->setTitle("Data Member");
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+		header('Content-Disposition: attachment;filename="'.$filename. '"');
+
+		header('Cache-Control: max-age=0');
+
+		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+		exit;
+	}
+	public function print_karyawan()
+	{
+		$data['karyawan'] = $this->m_admin->tampil_karyawan('karyawan');
+		$this->load->view('print_karyawan', $data);
+	}
+	public function excel_karyawan()
+	{
+		$data['karyawan'] = $this->m_admin->tampil_karyawan('karyawan');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		$object = new PHPexcel();
+
+		$object->getProperties()->setCreator("Green Laundry");
+		$object->getProperties()->setLastModifiedBy("Green Laundry");
+		$object->getProperties()->setTitle("Data Karyawan");
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1', 'NO');
+		$object->getActiveSheet()->setCellValue('B1', 'ID Karyawan');
+		$object->getActiveSheet()->setCellValue('C1', 'Tanggal Terdaftar');
+		$object->getActiveSheet()->setCellValue('D1', 'Nama');
+		$object->getActiveSheet()->setCellValue('E1', 'No Handphone');
+		$object->getActiveSheet()->setCellValue('F1', 'Alamat');
+
+		$baris = 2;
+		$no = 1;
+		foreach($data['karyawan'] as $pjm){
+			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+			$object->getActiveSheet()->setCellValue('B'.$baris, $pjm->id_karyawan);
+			$object->getActiveSheet()->setCellValue('C'.$baris, $pjm->tanggal_terdaftar);
+			$object->getActiveSheet()->setCellValue('D'.$baris, $pjm->nama);
+			$object->getActiveSheet()->setCellValue('E'.$baris, $pjm->no_hp);
+			$object->getActiveSheet()->setCellValue('F'.$baris, $pjm->alamat);
+			$baris++;
+		}
+		$filename="Data_Karyawan".'.xlsx';
+
+		$object->getActiveSheet()->setTitle("Data Karyawan");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 

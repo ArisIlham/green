@@ -8,10 +8,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Tabel Penjemputan</h6>
-            <a class="btn btn-secondary" href="<?php echo base_url('welcome/print')?>">
+            <a class="btn btn-secondary" href="<?php echo base_url('welcome/print_penjemputan')?>">
                 <i class = "fa fa-print"></i> Print
             </a>
-            <a class="btn btn-success" href="<?php echo base_url('welcome/excel')?>">
+            <a class="btn btn-success" href="<?php echo base_url('welcome/excel_penjemputan')?>">
                 <i class = "fa fa-file-excel"></i> Excel
             </a>
         </div>
