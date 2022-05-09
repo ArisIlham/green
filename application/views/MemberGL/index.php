@@ -61,7 +61,9 @@
                                 <div style="display: flex; padding-left: 10px; padding-right: 10px; justify-content: center; align-items: center; border-left: 2px dashed; border-color: white; width:30%;">
                                     <div>
                                         <center><button style="background: orange; border-color: white; color: white; border: 1px solid;" id="<?= $row->id_kupon ?>" type="submit">Klaim</button></center>
-                                        <p style="color:white; font-size:small; text-align:center;">Sisa: <?= $row->jumlah_klaim ?></p>
+                                        <?php if ($row->jumlah_klaim >= 0) { ?>
+                                            <p style="color:white; font-size:small; text-align:center;">Sisa: <?= $row->jumlah_klaim ?></p>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

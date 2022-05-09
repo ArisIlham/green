@@ -77,12 +77,30 @@
                     </div>
                 </div>
                 <div class="membership_info">
-                    <h1 class="kupon_info">Keuntungan Member Silver</h1>
-                    <ol style="list-style:decimal;">
-                        <li>Bebas Ongkir selamanya untuk wilayah Kabupaten Pringsewu</li>
-                        <li>Mendapatkan kupon promo setiap bulan</li>
-                        <li>Berkesempatan mendapat hadiah menarik dalam event tahunan Green Laundry Express</li>
-                    </ol>
+                    <?php if ($tier_member == 1) { ?>
+                        <h1 class="kupon_info">Keuntungan Member Silver</h1>
+                        <ol style="list-style:decimal;">
+                            <li>Bebas Ongkir selamanya untuk wilayah Kabupaten Pringsewu</li>
+                            <li>Mendapatkan kupon promo setiap bulan</li>
+                        </ol>
+                    <?php } else if ($tier_member == 2) { ?>
+                        <h1 class="kupon_info">Keuntungan Member Gold</h1>
+                        <ol style="list-style:decimal;">
+                            <li>Bebas Ongkir selamanya untuk wilayah Kabupaten Pringsewu</li>
+                            <li>Mendapatkan kupon promo setiap bulan</li>
+                            <li>Berkesempatan mendapat hadiah menarik dalam event tahunan Green Laundry Express</li>
+                        </ol>
+                    <?php
+                    } else { ?>
+                        <h1 class="kupon_info">Keuntungan Member Platinum</h1>
+                        <ol style="list-style:decimal;">
+                            <li>Bebas Ongkir selamanya untuk wilayah Kabupaten Pringsewu</li>
+                            <li>Mendapatkan kupon promo setiap bulan</li>
+                            <li>Berkesempatan mendapat hadiah menarik dalam event tahunan Green Laundry Express</li>
+                            <li>Diskon 15% Setiap Laundry Minimal 10kg</li>
+                        </ol>
+                    <?php } ?>
+
                 </div>
             </div>
 
