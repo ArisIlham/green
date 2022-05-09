@@ -25,10 +25,10 @@
                     <tbody>
                         <?php
                         $count = 0;
-                        foreach ($data as $row) {
+                        foreach ($order as $row) {
                             $count = $count + 1;
                         ?>
-                            <tr>
+                            <tr onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
                                 <td><?php echo $row->nama ?></td>
                                 <td><?php echo $row->alamat ?></td>
                                 <td><?php echo $row->no_hp ?></td>
@@ -46,6 +46,15 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="js/datatables-simple-demo.js"></script>
 </body>
 
 <!-- Page level custom scripts -->
