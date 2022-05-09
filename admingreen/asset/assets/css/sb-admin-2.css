@@ -26,7 +26,7 @@
   --gray-dark: #5a5c69;
   --primary: #4e73df;
   --secondary: #858796;
-  --success: #1e5128;
+  --success: #0b570f;
   --info: #36b9cc;
   --warning: #f6c23e;
   --danger: #e74a3b;
@@ -9912,8 +9912,8 @@ a:focus {
 }
 
 .bg-gradient-success {
-  background-color: #1e5128;
-  background-image: linear-gradient(180deg, #1e5128 10%, #1e5128 100%);
+  background-color: #0b570f;
+  background-image: linear-gradient(180deg, #0b570f 10%, #0b570f 100%);
   background-size: cover;
 }
 

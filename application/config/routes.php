@@ -57,5 +57,6 @@ $route['order'] = 'Welcome/order';
 $route['member/dashboard'] = 'Member/dashboard';
 $route['member/order'] = 'Member/orderForm';
 $route['member/profile'] = 'Member/profile';
+$route['member/history'] = 'Member/history';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -1,13 +1,10 @@
-<div class="container-fluid">
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Penjemputan</h1>
-    <p class="mb-4">Data Tabel yang harus dijemput</a>.</p>
-
-    <!-- DataTales Example -->
+<div id="layoutSidenav_content">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Tabel Penjemputan</h6>
+            <h6 class="m-0 font-weight-bold" style="color: green;">Riwayat Laundry</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,18 +15,17 @@
                             <th>Alamat</th>
                             <th>Kontak</th>
                             <th>Barang</th>
-                            <th>catatan</th>
-                            <th>waktu</th>
-                            <th>berat</th>
-                            <th>tagihan</th>
-                            <th>kupon</th>
-                            <th>aksi</th>
+                            <th>Catatan</th>
+                            <th>Waktu</th>
+                            <th>Berat</th>
+                            <th>Tagihan</th>
+                            <th>Kupon</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $count = 0;
-                        foreach ($queryAllpenjemputan as $row) {
+                        foreach ($data as $row) {
                             $count = $count + 1;
                         ?>
                             <tr>
@@ -42,10 +38,6 @@
                                 <td><?php echo $row->berat ?></td>
                                 <td><?php echo $row->harga ?></td>
                                 <td><?php echo $row->kupon ?></td>
-                                <td onclick = "javascript: return confirm('Anda Yakin Hapus?')"><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
-                                    <a href="<?php echo base_url('welcome/edit_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -53,5 +45,15 @@
             </div>
         </div>
     </div>
-
 </div>
+</body>
+
+<!-- Page level custom scripts -->
+
+<script src="<?php echo base_url('/asset/assets/'); ?>assets/vendor/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url('/asset/assets/'); ?>assets/vendor/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="<?php echo base_url('/asset/assets/'); ?>assets/js//datatables-demo.js"></script>
+
+</html>

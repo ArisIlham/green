@@ -51,6 +51,7 @@ class Member extends CI_Controller
             "nama" => $member->login()->nama,
             "alamat" => $member->login()->alamat,
             "foto" => $member->login()->foto,
+            "tier_member" => $member->login()->tier_member,
             "total_laundry" => $member->login()->total_laundry,
             "total_harga" => $member->login()->total_harga
         );
@@ -105,6 +106,18 @@ class Member extends CI_Controller
             $total_harga = $order->total($this->session->userdata('id_member'))["total_harga"];
             $member->total(array("id_member" => $this->session->userdata('id_member'), "total_laundry" => $total_laundry, "total_harga" => $total_harga));
             $this->load->view('MemberGL/profil', $this->session->userdata());
+        }
+    }
+
+    public function history()
+    {
+        $this->load->view('MemberGL/navigation', ["title" => "Riwayat Pesanan"]);
+        if ($this->session->userdata('id_member') == NULL) {
+            redirect(base_url('login'), 'location');
+        } else {
+            $order = $this->Order_model;
+            $data = $order->history($this->session->userdata('id_member'));
+            $this->load->view('MemberGL/history', ["data" => $data]);
         }
     }
 }

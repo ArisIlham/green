@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/validation.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <title>Join Member</title>
@@ -34,21 +35,31 @@
                             </div>
                             <div class=" mb-3">
                                 <label for="password" class="form-label">Kata Sandi</label>
-                                <input type="password" class="form-control" id="password" placeholder="Buat Kata Sandi" name="password">
+                                <div style="display:flex;">
+                                    <div style="display: block; width:100%;">
+                                        <input type="password" name="password" class="form-control" id="password" placeholder="Buat Kata Sandi Anda">
+                                    </div>
+                                    <i style="margin-left: -30px; margin-top: 5px; cursor:pointer;" class="bi bi-eye-slash" id="togglePassword"></i>
+                                </div>
                             </div>
                             <div class=" mb-3">
                                 <label for="repassword" class="form-label">Ulangi Kata Sandi</label>
-                                <input type="password" class="form-control" id="repassword" placeholder="Konfirmasi Kata Sandi" name="repassword">
+                                <div style="display:flex;">
+                                    <div style="display: block; width:100%;">
+                                        <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Konfirmasi Kata Sandi">
+                                    </div>
+                                    <i style="margin-left: -30px; margin-top: 5px; cursor:pointer;" class="bi bi-eye-slash" id="togglerePassword"></i>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Anda" aria-describedby="emailHelp">
                             </div>
-                            <!-- <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                            </div> -->
-                            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submit-btn">Daftar</button>
+                            <div class="mb-3" style="display: flex; text-align:center; justify-content:center;">
+                                <p style="margin-right: 3px;">Sudah Punya Akun?</p>
+                                <a href="<?= base_url('login') ?>">Login</a>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -58,6 +69,30 @@
 </body>
 
 <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const togglerePassword = document.querySelector("#togglerePassword");
+    const password = document.querySelector("#password");
+    const repassword = document.querySelector("#repassword");
+
+
+    togglePassword.addEventListener("click", function() {
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // toggle the icon
+        this.classList.toggle("bi-eye");
+    });
+
+    togglerePassword.addEventListener("click", function() {
+        // toggle the type attribute
+        const type = repassword.getAttribute("type") === "password" ? "text" : "password";
+        repassword.setAttribute("type", type);
+
+        // toggle the icon
+        this.classList.toggle("bi-eye");
+    });
+
     $(document).ready(function() {
         let csrfName = $('.txt_csrfname').attr('name');
         let csrfHash = $('.txt_csrfname').val();

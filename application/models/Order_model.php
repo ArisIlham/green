@@ -56,4 +56,10 @@ class Order_model extends CI_Model
         }
         return array("total_laundry" => $total_laundry, "total_harga" => $total_harga);
     }
+
+    public function history($id_member)
+    {
+        $order = $this->db->get_where($this->_table, ["id_member" => $id_member])->result();
+        return $order;
+    }
 }
