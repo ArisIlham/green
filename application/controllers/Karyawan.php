@@ -38,8 +38,11 @@ class Karyawan extends CI_Controller
     public function presensi()
     {
         $karyawan = $this->Presensi_model;
-        $karyawan->presensi();
-        $this->session->set_flashdata("success", "TRUE");
+        if ($karyawan->presensi() == true) {
+            $this->session->set_flashdata("success", "TRUE");
+        } else {
+            $this->session->set_flashdata("success", "FALSE");
+        }
         redirect(base_url('presensi'), 'location');
     }
 
@@ -47,5 +50,6 @@ class Karyawan extends CI_Controller
     {
         $karyawan = $this->Presensi_model;
         $karyawan->dailyPresensi();
+        redirect(base_url('presensi'), "location");
     }
 }

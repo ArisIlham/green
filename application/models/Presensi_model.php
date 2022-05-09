@@ -16,16 +16,21 @@ class Presensi_model extends CI_Model
         $datetime = new DateTime("now");
         $post = $this->input->post();
         $this->id_karyawan = $post["id"];
-        $presensi = $this->db->get_where($this->_table, array("id_karyawan" => $this->id_karyawan))->last_row();
-        $this->id_presensi = $presensi->id_presensi;
-        $this->nama = $post["nama"];
-        $this->status = $post["hadir"];
-        if (isset($post["hadir"])) {
-            if ($post["hadir"] == "Izin")
-                $this->keterangan = $post["ket"];
+        $presensi = $this->db->get_where($this->_table, array("id_karyawan" => $this->id_karyawan, "waktu_hadir" => $datetime->format('Y-m-d')))->last_row();
+        if ($presensi != NULL) {
+
+            $this->id_presensi = $presensi->id_presensi;
+            $this->nama = $post["nama"];
+            $this->status = $post["hadir"];
+            if (isset($post["hadir"])) {
+                if ($post["hadir"] == "Izin")
+                    $this->keterangan = $post["ket"];
+            }
+            $this->waktu_hadir = $datetime->format('Y-m-d G:i:s');
+            return $this->db->update($this->_table, $this, array('id_presensi' => $this->id_presensi, "waktu_hadir" => $datetime->format('Y-m-d')));
+        } else {
+            return false;
         }
-        $this->waktu_hadir = $datetime->format('Y-m-d G:i:s');
-        return $this->db->update($this->_table, $this, array('id_presensi' => $this->id_presensi));
     }
 
     public function dailyPresensi()
