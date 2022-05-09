@@ -153,5 +153,72 @@ class Welcome extends CI_Controller
 		$this->m_admin->input_karyawan($data, 'karyawan');
 		redirect('Welcome/karyawan');
 	}
-	
+	public function persentasi()
+	{
+		$this->load->view('header');
+		$this->load->view('topbar');
+		$data['hadir']=$this->m_admin->hadir();
+		$data['tidakhadir']=$this->m_admin->tidakhadir();
+		$data['izin']=$this->m_admin->izin();
+		$this->load->view('persentasi', $data);
+		$this->load->view('footer');
+	}
+	public function print()
+	{
+		$data['penjemputan'] = $this->m_admin->tampil_penjemputan('order');
+		$this->load->view('print_penjemputan', $data);
+	}
+	public function excel()
+	{
+		$data['penjemputan'] = $this->m_admin->tampil_penjemputan('order');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		$object = new PHPexcel();
+
+		$object->getProperties()->setCreator("Green Laundry");
+		$object->getProperties()->setLastModifiedBy("Green Laundry");
+		$object->getProperties()->setTitle("Data Orderan");
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1', 'NO');
+		$object->getActiveSheet()->setCellValue('B1', 'ID Member');
+		$object->getActiveSheet()->setCellValue('C1', 'NO HP');
+		$object->getActiveSheet()->setCellValue('D1', 'Nama');
+		$object->getActiveSheet()->setCellValue('E1', 'Alamat');
+		$object->getActiveSheet()->setCellValue('F1', 'Jenis Barang');
+		$object->getActiveSheet()->setCellValue('G1', 'Catatan');
+		$object->getActiveSheet()->setCellValue('H1', 'Waktu Penjemputan');
+		$object->getActiveSheet()->setCellValue('I1', 'Kupon');
+		$object->getActiveSheet()->setCellValue('J1', 'Berat');
+		$object->getActiveSheet()->setCellValue('K1', 'Harga');
+
+		$baris = 2;
+		$no = 1;
+		foreach($data['penjemputan'] as $pjm){
+			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+			$object->getActiveSheet()->setCellValue('B'.$baris, $pjm->id_member);
+			$object->getActiveSheet()->setCellValue('C'.$baris, $pjm->no_hp);
+			$object->getActiveSheet()->setCellValue('D'.$baris, $pjm->nama);
+			$object->getActiveSheet()->setCellValue('E'.$baris, $pjm->alamat);
+			$object->getActiveSheet()->setCellValue('F'.$baris, $pjm->jenis_barang);
+			$object->getActiveSheet()->setCellValue('G'.$baris, $pjm->note);
+			$object->getActiveSheet()->setCellValue('H'.$baris, $pjm->waktu_jemput);
+			$object->getActiveSheet()->setCellValue('I'.$baris, $pjm->kupon);
+			$object->getActiveSheet()->setCellValue('J'.$baris, $pjm->berat);
+			$object->getActiveSheet()->setCellValue('K'.$baris, $pjm->harga);
+			$baris++;
+		}
+		$filename="Data_Orderan".'.xlsx';
+
+		$object->getActiveSheet()->setTitle("Data Orderan");
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+		header('Content-Disposition: attachment;filename="'.$filename. '"');
+
+		header('Cache-Control: max-age=0');
+
+		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+		exit;
+	}
 }

@@ -97,4 +97,16 @@ class M_admin extends CI_Model
 			return $result;
 		}
 	}
+	function izin(){
+		$this->db->where('status=','Izin');
+		return $this->db->count_all_results('presensi');
+	}
+	function tidakhadir(){
+		$this->db->where('status=','Tidak Hadir');
+		return $this->db->count_all_results('presensi');
+	}
+	function hadir(){
+		$this->db->where('status=','Hadir');
+		return $this->db->count_all_results('presensi');
+	}
 }
