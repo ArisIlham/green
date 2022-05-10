@@ -11,12 +11,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Kontak</th>
                             <th>Barang</th>
-                            <th>Catatan</th>
-                            <th>Waktu</th>
+                            <th>Waktu Jemput</th>
                             <th>Berat</th>
                             <th>Tagihan</th>
                             <th>Kupon</th>
@@ -29,15 +25,15 @@
                             $count = $count + 1;
                         ?>
                             <tr onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
-                                <td><?php echo $row->nama ?></td>
-                                <td><?php echo $row->alamat ?></td>
-                                <td><?php echo $row->no_hp ?></td>
                                 <td><?php echo $row->jenis_barang ?></td>
-                                <td><?php echo $row->note ?></td>
                                 <td><?php echo $row->waktu_jemput ?></td>
-                                <td><?php echo $row->berat ?></td>
-                                <td><?php echo $row->harga ?></td>
-                                <td><?php echo $row->kupon ?></td>
+                                <td><?php if ($row->berat == NULL) {
+                                        echo "0";
+                                    } else {
+                                        echo $row->berat;
+                                    } ?>kg</td>
+                                <td>Rp<?php echo number_format($row->harga, 2, ',', '.') ?></td>
+                                <td><?php echo $row->judul_kupon ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

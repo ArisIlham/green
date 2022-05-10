@@ -81,18 +81,20 @@ class Welcome extends CI_Controller
 		if ($berat >= $data_kupon->min_laundry) {
 			$terpakai = 1;
 			$kupon = $data_kupon->kode_kupon;
+			$judul_kupon = $data_kupon->judul_kupon;
 			$diskon = $harga * $data_kupon->persentase_diskon / 100;
 			$harga = $harga - $diskon;
 		} else {
 			$terpakai = 0;
 			$kupon = NULL;
+			$judul_kupon = NULL;
 		}
 
 		$data = array(
 			'berat'		=> $berat,
 			'harga'		=> $harga,
 			'kupon' => $kupon,
-			'status' => $this->input->post("status")
+			'judul_kupon' => $judul_kupon,
 		);
 		$where = array(
 			'id_order'	=> $id_order

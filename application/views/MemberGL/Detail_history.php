@@ -28,11 +28,11 @@
                   echo "<i>Barang belum ditimbang</i>";
                 } ?></p>
           <p>: <?php if ($harga != NULL) {
-                  echo "Rp" . $harga;
+                  echo "Rp" . number_format($harga, 2, ',', '.');
                 } else {
                   echo "<i>Barang belum ditimbang</i>";
                 } ?></p>
-          <p>: <?= $kupon; ?></p>
+          <p>: <?= $judul_kupon; ?></p>
           <p>: <?php if ($status == 1) {
                   echo "Selesai";
                 } else if ($status == 2) {
@@ -48,7 +48,7 @@
 
       <div>
         <center>
-          <a class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303; " href="<?= base_url('member/history') ?>">Kembali</a>
+          <a class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303; " href="<?= $_SERVER['HTTP_REFERER']; ?>">Kembali</a>
         </center>
       </div>
     </div>

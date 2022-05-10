@@ -7,6 +7,7 @@ class kuponMember_model extends CI_Model
     public $id_member;
     public $id_kupon;
     public $kode_kupon;
+    public $judul_kupon;
     public $persentase_diskon;
     public $min_laundry;
     public $masa_berlaku;
@@ -18,6 +19,7 @@ class kuponMember_model extends CI_Model
         $this->id_member = $id_member;
         $this->id_kupon = $kupon["id_kupon"];
         $this->kode_kupon = $kupon["kode_kupon"];
+        $this->judul_kupon = $kupon["judul_kupon"];
         $this->persentase_diskon = $kupon["persentase_diskon"];
         $this->min_laundry = $kupon["min_laundry"];
         $this->masa_berlaku = $kupon["masa_berlaku"];

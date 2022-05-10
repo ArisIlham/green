@@ -46,7 +46,11 @@
                                 <td><?php echo $row->jenis_barang ?></td>
                                 <td><?php echo $row->note ?></td>
                                 <td><?php echo $row->waktu_jemput ?></td>
-                                <td><?php echo $row->berat ?>kg</td>
+                                <td><?php if ($row->berat == NULL) {
+                                        echo "0";
+                                    } else {
+                                        echo $row->berat;
+                                    } ?>kg</td>
                                 <td>Rp<?php echo number_format($row->harga, 2, ',', '.') ?></td>
                                 <td><?php echo $row->kupon ?></td>
                                 <td><?php if ($row->status == 1) {

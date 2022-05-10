@@ -13,25 +13,32 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body">Pesanan Berlangsung</div>
-                        <?php foreach ($order as $row) {
-                            if ($row->status == 2) {
-                        ?>
-                                <div class="card-footer d-flex align-items-center justify-content-between" id="data" onclick="location.href = `<?= base_url('member/history') ?>`">
-                                    <div>
-                                        <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= $row->jenis_barang ?></p>
-                                        <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= "(" . $row->waktu_jemput . ")" ?></p>
+                        <table id="recent" width="100%" cellspacing="0">
+                            <tbody>
+                                <?php $count = 0;
+                                foreach ($order as $row) {
+                                    if ($row->status == 2) {
+                                ?>
+                                        <tr class="card-footer d-flex align-items-center justify-content-between" onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
+                                            <td><?= $row->jenis_barang ?><br><?= "(" . $row->waktu_jemput . ")" ?></td>
+                                            <td>
+                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                            </td>
+                                        </tr>
+                                    <?php $count++;
+                                    }
+                                }
+                                if ($count == 0) {
+                                    ?>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="small text-white stretched-link" style="margin-bottom:1px;">Tidak Ada Pesanan</p>
+                                        </div>
                                     </div>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            <?php } else {
-                            ?>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <p class="small text-white stretched-link" style="margin-bottom:1px;">Tidak Ada Pesanan</p>
-                                    </div>
-                                </div>
-                        <?php }
-                        } ?>
+                                <?php } ?>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

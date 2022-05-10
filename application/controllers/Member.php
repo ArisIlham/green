@@ -161,6 +161,9 @@ class Member extends CI_Controller
 
     public function history()
     {
+        $order = $this->Order_model;
+        $data = $order->history($this->session->userdata('id_member'));
+        $this->session->set_userdata("order", $data);
         $this->load->view('MemberGL/navigation', ["title" => "Riwayat Pesanan"]);
         if ($this->session->userdata('id_member') == NULL) {
             redirect(base_url('login'), 'location');
@@ -235,6 +238,7 @@ class Member extends CI_Controller
         $data = [
             "id_kupon" => $kupon->id_kupon,
             "kode_kupon" => $kupon->kode_kupon,
+            "judul_kupon" => $kupon->judul_kupon,
             "persentase_diskon" => $kupon->persentase_diskon,
             "min_laundry" => $kupon->min_laundry,
             "masa_berlaku" => $kupon->masa_berlaku,

@@ -20,7 +20,7 @@
                             <th>Judul Kupon</th>
                             <th>Masa Berlaku</th>
                             <th>Keterangan</th>
-                            <th>Miniman Laundry</th>
+                            <th>Minimal Laundry</th>
                             <th>Persentase Diskon</th>
                             <th>Tier Kupon</th>
                             <th>Jumlah Klaim</th>
