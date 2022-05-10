@@ -8,11 +8,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Tabel Penjemputan</h6>
-            <a class="btn btn-secondary" href="<?php echo base_url('welcome/print_penjemputan')?>">
-                <i class = "fa fa-print"></i> Print
+            <a class="btn btn-secondary" href="<?php echo base_url('welcome/print_penjemputan') ?>">
+                <i class="fa fa-print"></i> Print
             </a>
-            <a class="btn btn-success" href="<?php echo base_url('welcome/excel_penjemputan')?>">
-                <i class = "fa fa-file-excel"></i> Excel
+            <a class="btn btn-success" href="<?php echo base_url('welcome/excel_penjemputan') ?>">
+                <i class="fa fa-file-excel"></i> Excel
             </a>
         </div>
         <div class="card-body">
@@ -48,10 +48,12 @@
                                 <td><?php echo $row->berat ?></td>
                                 <td><?php echo $row->harga ?></td>
                                 <td><?php echo $row->kupon ?></td>
-                                <td onclick = "javascript: return confirm('Anda Yakin Hapus?')"><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
+                                <td><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                        <button onclick="javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                    <hr>
                                     <a href="<?php echo base_url('welcome/edit_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
+                                        <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>

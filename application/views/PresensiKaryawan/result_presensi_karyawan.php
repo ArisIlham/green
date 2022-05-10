@@ -39,7 +39,7 @@
 <script>
     $("#izin").click(function() {
         if (!$("#ket").length) {
-            $("#lizin").after('<div id="ketizin">' + '<label for="ket" id="lket">Keterangan</label><br>' + '<input type="text" name="ket" id="ket">' + '</div');
+            $("#lizin").after('<div id="ketizin">' + '<label for="ket" id="lket">Keterangan</label><br>' + '<input type="text" name="ket" id="ket">' + '</div>');
         }
     });
 

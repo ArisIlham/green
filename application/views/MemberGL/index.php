@@ -16,7 +16,7 @@
                         <?php foreach ($order as $row) {
                             if ($row->status == 2) {
                         ?>
-                                <div class="card-footer d-flex align-items-center justify-content-between" onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
+                                <div class="card-footer d-flex align-items-center justify-content-between" id="data" onclick="location.href = `<?= base_url('member/history') ?>`">
                                     <div>
                                         <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= $row->jenis_barang ?></p>
                                         <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= "(" . $row->waktu_jemput . ")" ?></p>
@@ -32,7 +32,6 @@
                                 </div>
                         <?php }
                         } ?>
-
                     </div>
                 </div>
             </div>
@@ -94,7 +93,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-
         <?php foreach ($kupon as $row) {
             foreach ($kupon_member as $row2) {
                 if ($row->id_kupon === $row2->id_kupon) {
