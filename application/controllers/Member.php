@@ -105,7 +105,7 @@ class Member extends CI_Controller
     {
         $order = $this->Order_model;
         $order->order();
-        redirect(base_url('order'), 'refresh');
+        $this->load->view('MemberGL/proses_penjemputan', $this->session->userdata());
     }
 
     public function dashboard()

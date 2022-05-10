@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<head>
+    <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/styles.css" rel="stylesheet" />
+</head>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
@@ -10,7 +13,11 @@
 
             <div>
                 <center>
-                    <a class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303; " href="<?= base_url('member/dashboard') ?>">Selesai</a>
+                    <?php if (isset($id_member)) { ?>
+                        <a class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303; " href="<?= base_url('member/dashboard') ?>">Selesai</a>
+                    <?php } else { ?>
+                        <a class="btn btn-primary btn-block" style="background-color: #33A303; border-color: #33A303; " href="<?= base_url('/') ?>">Selesai</a>
+                    <?php } ?>
                 </center>
             </div>
         </div>

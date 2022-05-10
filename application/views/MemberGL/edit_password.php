@@ -21,7 +21,7 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header  mb-0">
-                        <h5 class="text-center">Edit Profile</h5>
+                        <h5 class="text-center">Ubah Password</h5>
                     </div>
                     <div class="card-body">
                         <form action=<?= base_url('Member/goEditPassword') ?> method="POST" id="join" enctype="multipart/form-data">

@@ -29,12 +29,16 @@
                         <div class="user_level_platinum">
                             <h3 class="user_level_text" style="padding-top: 3px;"><?= "Platinum"; ?></h3>
                         </div>
-                    <?php } ?>
+                    <?php
+                    } ?>
 
 
                 </div>
                 <div class="user_bio">
-                    <h1 class="user_name"><?= $nama; ?></h1>
+                    <div style="display:flex;">
+                        <h1 class="user_name"><?= $nama; ?></h1>
+                        <p class="user_phone" style="margin-top: 20px;">(<?= $tanggal_lahir; ?>)</p>
+                    </div>
                     <h3 class="kontak">Kontak</h3>
                     <p class="user_phone"><?= $no_hp; ?></p>
                     <h3 class="address_tittle"> Alamat</h3>

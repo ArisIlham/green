@@ -153,15 +153,17 @@ class Member_model extends CI_Model
         $post = $this->input->post();
         $this->foto = $data["foto"];
         $this->nama = $post["nama"];
+        $this->tanggal_lahir = $post["tanggal_lahir"];
         $this->alamat = $post["alamat"];
         $this->no_hp = $post["no_hp"];
         if ($this->foto == NULL) {
-            $this->db->update($this->_table, array("nama" => $this->nama, "alamat" => $this->alamat, "no_hp" => $this->no_hp), array("id_member" => $data['id']));
+            $this->db->update($this->_table, array("nama" => $this->nama, "tanggal_lahir" => $this->tanggal_lahir, "alamat" => $this->alamat, "no_hp" => $this->no_hp), array("id_member" => $data['id']));
         } else {
-            $this->db->update($this->_table, array("foto" => $this->foto, "nama" => $this->nama, "alamat" => $this->alamat, "no_hp" => $this->no_hp), array("id_member" =>  $data['id']));
+            $this->db->update($this->_table, array("foto" => $this->foto, "nama" => $this->nama, "tanggal_lahir" => $this->tanggal_lahir, "alamat" => $this->alamat, "no_hp" => $this->no_hp), array("id_member" =>  $data['id']));
             $this->session->set_userdata("foto", $this->foto);
         }
         $this->session->set_userdata("nama", $this->nama);
+        $this->session->set_userdata("tanggal_lahir", $this->tanggal_lahir);
         $this->session->set_userdata("alamat", $this->alamat);
         $this->session->set_userdata("no_hp", $this->no_hp);
     }
