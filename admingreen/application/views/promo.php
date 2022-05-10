@@ -38,7 +38,17 @@
                                 <td><?php echo $row->keterangan ?></td>
                                 <td><?php echo $row->min_laundry ?>kg</td>
                                 <td><?php echo $row->persentase_diskon ?>%</td>
-                                <td><?php echo $row->tier_kupon ?></td>
+                                <td><?php if ($row->tier_kupon == 0) {
+                                        echo "newMember";
+                                    } elseif ($row->tier_kupon == 1) {
+                                        echo "Silver";
+                                    } elseif ($row->tier_kupon == 2) {
+                                        echo "Gold";
+                                    } elseif ($row->tier_kupon == 3) {
+                                        echo "Platinum";
+                                    } else {
+                                        echo "Semua Tier";
+                                    } ?></td>
                                 <td><?php echo $row->jumlah_klaim ?></td>
                             </tr>
                         <?php } ?>

@@ -12,6 +12,7 @@ class Order_model extends CI_Model
     public $jenis_barang;
     public $note;
     public $waktu_jemput;
+    public $id_kupon_member;
     public $kupon;
     public $berat;
     public $harga;
@@ -28,6 +29,7 @@ class Order_model extends CI_Model
         $this->jenis_barang = $post["jenis"];
         $this->note = $post["note"];
         $this->waktu_jemput = $post["waktu"];
+        $this->id_kupon_member = $post["id_kupon_member"];
         $this->kupon = $post["kupon"];
         $this->status = 2;
         return $this->db->insert($this->_table, $this);

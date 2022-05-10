@@ -24,12 +24,13 @@
                             <th>Alamat</th>
                             <th>Kontak</th>
                             <th>Barang</th>
-                            <th>catatan</th>
-                            <th>waktu</th>
-                            <th>berat</th>
-                            <th>tagihan</th>
-                            <th>kupon</th>
-                            <th>aksi</th>
+                            <th>Catatan</th>
+                            <th>Waktu</th>
+                            <th>Berat</th>
+                            <th>Tagihan</th>
+                            <th>Kupon</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,14 +46,30 @@
                                 <td><?php echo $row->jenis_barang ?></td>
                                 <td><?php echo $row->note ?></td>
                                 <td><?php echo $row->waktu_jemput ?></td>
-                                <td><?php echo $row->berat ?></td>
-                                <td><?php echo $row->harga ?></td>
+                                <td><?php echo $row->berat ?>kg</td>
+                                <td>Rp<?php echo number_format($row->harga, 2, ',', '.') ?></td>
                                 <td><?php echo $row->kupon ?></td>
-                                <td><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                <td><?php if ($row->status == 1) {
+                                        echo "Selesai";
+                                    } elseif ($row->status == 2) {
+                                        echo "Pending";
+                                    } else {
+                                        echo "Dibatalkan";
+                                    } ?></td>
+                                <td>
+                                    <!-- <a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
                                         <button onclick="javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
-                                    <hr>
-                                    <a href="<?php echo base_url('welcome/edit_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+                                    <hr> -->
+                                    <div style="display:flex;">
+                                        <a style="margin-right: 3px;" href="<?php echo base_url('welcome/edit_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                            <button class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button></a>
+                                        <a style="margin-right: 3px;" href="<?php echo base_url('welcome/pending_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                            <button class="btn btn-warning btn-sm"><i class="fa fa-clock"></i></button></a>
+                                        <a style="margin-right: 3px;" href="<?php echo base_url('welcome/selesai_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                            <button class="btn btn-success btn-sm"><i class="fa fa-check"></i></button></a>
+                                        <a href="<?php echo base_url('welcome/batal_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                            <button class="btn btn-danger btn-sm"><i class="fa fa-ban"></i></button></a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -7,6 +7,8 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('m_admin');
+		$this->load->model('Order_model');
+		$this->load->model('kuponMember_model');
 		$this->load->helper('url');
 	}
 
@@ -36,31 +38,75 @@ class Welcome extends CI_Controller
 	}
 	public function hapus_penjemputan($id_order)
 	{
-		$where = array ('id_order'=>$id_order);
+		$where = array('id_order' => $id_order);
 		$this->m_admin->hapus_penjemputan($where, 'order');
 		redirect('welcome/penjemputan/');
 	}
-	public function edit_penjemputan($id_order){
-		$where = array ('id_order'=>$id_order);
+	public function edit_penjemputan($id_order)
+	{
+		$where = array('id_order' => $id_order);
 		$data['penjemputan'] = $this->m_admin->edit_penjemputan($where, 'order')->result();
 		$this->load->view('header');
 		$this->load->view('topbar');
 		$this->load->view('edit_penjemputan', $data);
 		$this->load->view('footer');
 	}
-	public function update_penjemputan(){
+
+	public function pending_penjemputan($id_order)
+	{
+		$this->m_admin->pending_penjemputan($id_order);
+		redirect('welcome/penjemputan/');
+	}
+
+	public function selesai_penjemputan($id_order)
+	{
+		$where = array('id_order' => $id_order);
+		$this->m_admin->selesai_penjemputan($where, 'order');
+		redirect('welcome/penjemputan/');
+	}
+	public function batal_penjemputan($id_order)
+	{
+		$where = array('id_order' => $id_order);
+		$this->m_admin->batal_penjemputan($where, 'order');
+		redirect('welcome/penjemputan/');
+	}
+	public function update_penjemputan()
+	{
+		$order = $this->Order_model;
 		$id_order = $this->input->post('id_order');
+		$data_order = $this->m_admin->edit_penjemputan(["id_order" => $id_order], 'order')->row();
+		$data_kupon = $this->kuponMember_model->getKupon($data_order->id_kupon_member);
 		$berat = $this->input->post('berat');
 		$harga = $this->input->post('harga');
+		if ($berat >= $data_kupon->min_laundry) {
+			$terpakai = 1;
+			$kupon = $data_kupon->kode_kupon;
+			$diskon = $harga * $data_kupon->persentase_diskon / 100;
+			$harga = $harga - $diskon;
+		} else {
+			$terpakai = 0;
+			$kupon = NULL;
+		}
 
 		$data = array(
 			'berat'		=> $berat,
 			'harga'		=> $harga,
+			'kupon' => $kupon,
+			'status' => $this->input->post("status")
 		);
 		$where = array(
 			'id_order'	=> $id_order
 		);
 		$this->m_admin->update_penjemputan($where, $data, 'order');
+
+		$id_member = $this->m_admin->edit_penjemputan(["id_order" => $id_order], 'order')->row();
+		$total_laundry = $order->total($id_member->id_member)["total_laundry"];
+		$total_harga = $order->total($id_member->id_member)["total_harga"];
+		$member = array(
+			'total_laundry'		=> $total_laundry,
+			'total_harga'		=> $total_harga
+		);
+		$this->m_admin->update_member($id_member->id_member, $member, ["terpakai" => $terpakai]);
 		redirect('welcome/penjemputan/');
 	}
 	public function datamember()
@@ -113,7 +159,8 @@ class Welcome extends CI_Controller
 		$this->m_admin->input_promo($data, 'kupon');
 		redirect('Welcome/promo');
 	}
-	public function presensi(){
+	public function presensi()
+	{
 		$this->load->view('header');
 		$this->load->view('topbar');
 		$queryAllpresensi = $this->m_admin->tampil_presensi();
@@ -121,7 +168,8 @@ class Welcome extends CI_Controller
 		$this->load->view('presensi', $DATA);
 		$this->load->view('footer');
 	}
-	public function karyawan(){
+	public function karyawan()
+	{
 		$this->load->view('header');
 		$this->load->view('topbar');
 		$queryAllkaryawan = $this->m_admin->tampil_karyawan();
@@ -157,9 +205,9 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('header');
 		$this->load->view('topbar');
-		$data['hadir']=$this->m_admin->hadir();
-		$data['tidakhadir']=$this->m_admin->tidakhadir();
-		$data['izin']=$this->m_admin->izin();
+		$data['hadir'] = $this->m_admin->hadir();
+		$data['tidakhadir'] = $this->m_admin->tidakhadir();
+		$data['izin'] = $this->m_admin->izin();
 		$this->load->view('persentasi', $data);
 		$this->load->view('footer');
 	}
@@ -171,8 +219,8 @@ class Welcome extends CI_Controller
 	public function excel_penjemputan()
 	{
 		$data['penjemputan'] = $this->m_admin->tampil_penjemputan('order');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 		$object = new PHPexcel();
 
 		$object->getProperties()->setCreator("Green Laundry");
@@ -193,31 +241,31 @@ class Welcome extends CI_Controller
 
 		$baris = 2;
 		$no = 1;
-		foreach($data['penjemputan'] as $pjm){
-			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-			$object->getActiveSheet()->setCellValue('B'.$baris, $pjm->id_member);
-			$object->getActiveSheet()->setCellValue('C'.$baris, $pjm->no_hp);
-			$object->getActiveSheet()->setCellValue('D'.$baris, $pjm->nama);
-			$object->getActiveSheet()->setCellValue('E'.$baris, $pjm->alamat);
-			$object->getActiveSheet()->setCellValue('F'.$baris, $pjm->jenis_barang);
-			$object->getActiveSheet()->setCellValue('G'.$baris, $pjm->note);
-			$object->getActiveSheet()->setCellValue('H'.$baris, $pjm->waktu_jemput);
-			$object->getActiveSheet()->setCellValue('I'.$baris, $pjm->kupon);
-			$object->getActiveSheet()->setCellValue('J'.$baris, $pjm->berat);
-			$object->getActiveSheet()->setCellValue('K'.$baris, $pjm->harga);
+		foreach ($data['penjemputan'] as $pjm) {
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $pjm->id_member);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $pjm->no_hp);
+			$object->getActiveSheet()->setCellValue('D' . $baris, $pjm->nama);
+			$object->getActiveSheet()->setCellValue('E' . $baris, $pjm->alamat);
+			$object->getActiveSheet()->setCellValue('F' . $baris, $pjm->jenis_barang);
+			$object->getActiveSheet()->setCellValue('G' . $baris, $pjm->note);
+			$object->getActiveSheet()->setCellValue('H' . $baris, $pjm->waktu_jemput);
+			$object->getActiveSheet()->setCellValue('I' . $baris, $pjm->kupon);
+			$object->getActiveSheet()->setCellValue('J' . $baris, $pjm->berat);
+			$object->getActiveSheet()->setCellValue('K' . $baris, $pjm->harga);
 			$baris++;
 		}
-		$filename="Data_Orderan".'.xlsx';
+		$filename = "Data_Orderan" . '.xlsx';
 
 		$object->getActiveSheet()->setTitle("Data Orderan");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
-		header('Content-Disposition: attachment;filename="'.$filename. '"');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
 
 		header('Cache-Control: max-age=0');
 
-		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
 		$writer->save('php://output');
 		exit;
 	}
@@ -229,8 +277,8 @@ class Welcome extends CI_Controller
 	public function excel_member()
 	{
 		$data['member'] = $this->m_admin->tampil_datamember('member');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 		$object = new PHPexcel();
 
 		$object->getProperties()->setCreator("Green Laundry");
@@ -249,29 +297,29 @@ class Welcome extends CI_Controller
 
 		$baris = 2;
 		$no = 1;
-		foreach($data['member'] as $pjm){
-			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-			$object->getActiveSheet()->setCellValue('B'.$baris, $pjm->id_member);
-			$object->getActiveSheet()->setCellValue('C'.$baris, $pjm->no_hp);
-			$object->getActiveSheet()->setCellValue('D'.$baris, $pjm->nama);
-			$object->getActiveSheet()->setCellValue('E'.$baris, $pjm->alamat);
-			$object->getActiveSheet()->setCellValue('F'.$baris, $pjm->foto);
-			$object->getActiveSheet()->setCellValue('G'.$baris, $pjm->tier_member);
-			$object->getActiveSheet()->setCellValue('H'.$baris, $pjm->total_laundry);
-			$object->getActiveSheet()->setCellValue('I'.$baris, $pjm->total_harga);
+		foreach ($data['member'] as $pjm) {
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $pjm->id_member);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $pjm->no_hp);
+			$object->getActiveSheet()->setCellValue('D' . $baris, $pjm->nama);
+			$object->getActiveSheet()->setCellValue('E' . $baris, $pjm->alamat);
+			$object->getActiveSheet()->setCellValue('F' . $baris, $pjm->foto);
+			$object->getActiveSheet()->setCellValue('G' . $baris, $pjm->tier_member);
+			$object->getActiveSheet()->setCellValue('H' . $baris, $pjm->total_laundry);
+			$object->getActiveSheet()->setCellValue('I' . $baris, $pjm->total_harga);
 			$baris++;
 		}
-		$filename="Data_Member".'.xlsx';
+		$filename = "Data_Member" . '.xlsx';
 
 		$object->getActiveSheet()->setTitle("Data Member");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
-		header('Content-Disposition: attachment;filename="'.$filename. '"');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
 
 		header('Cache-Control: max-age=0');
 
-		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
 		$writer->save('php://output');
 		exit;
 	}
@@ -283,8 +331,8 @@ class Welcome extends CI_Controller
 	public function excel_karyawan()
 	{
 		$data['karyawan'] = $this->m_admin->tampil_karyawan('karyawan');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 		$object = new PHPexcel();
 
 		$object->getProperties()->setCreator("Green Laundry");
@@ -300,26 +348,26 @@ class Welcome extends CI_Controller
 
 		$baris = 2;
 		$no = 1;
-		foreach($data['karyawan'] as $pjm){
-			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-			$object->getActiveSheet()->setCellValue('B'.$baris, $pjm->id_karyawan);
-			$object->getActiveSheet()->setCellValue('C'.$baris, $pjm->tanggal_terdaftar);
-			$object->getActiveSheet()->setCellValue('D'.$baris, $pjm->nama);
-			$object->getActiveSheet()->setCellValue('E'.$baris, $pjm->no_hp);
-			$object->getActiveSheet()->setCellValue('F'.$baris, $pjm->alamat);
+		foreach ($data['karyawan'] as $pjm) {
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $pjm->id_karyawan);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $pjm->tanggal_terdaftar);
+			$object->getActiveSheet()->setCellValue('D' . $baris, $pjm->nama);
+			$object->getActiveSheet()->setCellValue('E' . $baris, $pjm->no_hp);
+			$object->getActiveSheet()->setCellValue('F' . $baris, $pjm->alamat);
 			$baris++;
 		}
-		$filename="Data_Karyawan".'.xlsx';
+		$filename = "Data_Karyawan" . '.xlsx';
 
 		$object->getActiveSheet()->setTitle("Data Karyawan");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
-		header('Content-Disposition: attachment;filename="'.$filename. '"');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
 
 		header('Cache-Control: max-age=0');
 
-		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
 		$writer->save('php://output');
 		exit;
 	}
