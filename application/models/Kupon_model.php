@@ -30,11 +30,11 @@ class Kupon_model extends CI_Model
     public function addKupon($tanggal_join, $id_member)
     {
         $this->id_kupon = uniqid();
-        $this->kode_kupon = "DSC 10%-1kg";
+        $this->kode_kupon = "DSC 10%-3kg";
         $this->judul_kupon = "Diskon Khusus Member Baru";
         $this->masa_berlaku = $tanggal_join;
         $this->keterangan = "Khusus untuk Member Baru";
-        $this->min_laundry = 1;
+        $this->min_laundry = 3;
         $this->persentase_diskon = 10;
         $this->tier_kupon = 0;
         $this->jumlah_klaim = 1;
