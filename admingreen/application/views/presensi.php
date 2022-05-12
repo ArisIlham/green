@@ -17,6 +17,7 @@
                             <th>ID Karyawan</th>
                             <th>Namat</th>
                             <th>Status</th>
+                            <th>Tanggal</th>
                             <th>Waktu Hadir</th>
                             <th>Keterangan</th>
                         </tr>
@@ -31,7 +32,8 @@
                                 <td><?php echo $row->id_karyawan ?></td>
                                 <td><?php echo $row->nama ?></td>
                                 <td><?php echo $row->status ?></td>
-                                <td><?php echo $row->waktu_hadir ?></td>
+                                <td><?php echo $row->tanggal ?></td>
+                                <td><?php echo $row->jam ?></td>
                                 <td><?php echo $row->keterangan ?></td>
                             </tr>
                         <?php } ?>

@@ -46,8 +46,12 @@
                                     } else {
                                         echo "Platinum";
                                     } ?></td>
-                                <td><?php echo $row->total_laundry ?></td>
-                                <td><?php echo $row->total_harga ?></td>
+                                <td><?php if ($row->total_laundry == NULL) {
+                                        echo "0";
+                                    } else {
+                                        echo $row->total_laundry;
+                                    } ?>kg</td>
+                                <td>Rp<?php echo number_format($row->total_harga, 2, ',', '.') ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

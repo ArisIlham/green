@@ -17,8 +17,8 @@ class Presensi_model extends CI_Model
         $datetime = new DateTime("now");
         $post = $this->input->post();
         $this->id_karyawan = $post["id"];
-        $presensi = $this->db->get_where($this->_table, array("id_karyawan" => $this->id_karyawan, "waktu_hadir" => $datetime->format('Y-m-d')))->last_row();
-        if ($presensi != NULL) {
+        $presensi = $this->db->get_where($this->_table, array("id_karyawan" => $this->id_karyawan, "tanggal" => $datetime->format('Y-m-d')))->last_row();
+        if ($presensi->status == "Tidak Hadir") {
 
             $this->id_presensi = $presensi->id_presensi;
             $this->nama = $post["nama"];
@@ -29,7 +29,7 @@ class Presensi_model extends CI_Model
             }
             $this->tanggal = $datetime->format('Y-m-d');
             $this->jam = $datetime->format('G:i:s');
-            return $this->db->update($this->_table, $this, array('id_presensi' => $this->id_presensi, "waktu_hadir" => $datetime->format('Y-m-d')));
+            return $this->db->update($this->_table, $this, array('id_presensi' => $this->id_presensi, "tanggal" => $datetime->format('Y-m-d')));
         } else {
             return false;
         }
