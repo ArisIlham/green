@@ -113,7 +113,7 @@ class M_admin extends CI_Model
 	function jumlah_kehadiran()
 	{
 		$this->db->select('count(id_karyawan) as jumlah_kehadiran');
-		$this->db->where('waktu_hadir', date('Y-m-d'));
+		$this->db->where(['tanggal' => date('Y-m-d'), 'status' => "Hadir"]);
 		$query = $this->db->get('presensi');
 		if ($query->result()) {
 			return $query->result();

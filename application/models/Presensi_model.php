@@ -7,8 +7,9 @@ class Presensi_model extends CI_Model
     public $id_karyawan;
     public $nama;
     public $status;
-    public $waktu_hadir;
     public $keterangan;
+    public $tanggal;
+    public $jam;
 
     public function presensi()
     {
@@ -26,7 +27,8 @@ class Presensi_model extends CI_Model
                 if ($post["hadir"] == "Izin")
                     $this->keterangan = $post["ket"];
             }
-            $this->waktu_hadir = $datetime->format('Y-m-d G:i:s');
+            $this->tanggal = $datetime->format('Y-m-d');
+            $this->jam = $datetime->format('G:i:s');
             return $this->db->update($this->_table, $this, array('id_presensi' => $this->id_presensi, "waktu_hadir" => $datetime->format('Y-m-d')));
         } else {
             return false;
@@ -43,7 +45,7 @@ class Presensi_model extends CI_Model
             $this->id_karyawan = $row->id_karyawan;
             $this->nama = $row->nama;
             $this->status = "Tidak Hadir";
-            $this->waktu_hadir = $datetime->format('Y-m-d');
+            $this->tanggal = $datetime->format('Y-m-d');
             $this->db->insert($this->_table, $this);
         }
     }
