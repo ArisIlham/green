@@ -24,6 +24,7 @@
                             <th>Persentase Diskon</th>
                             <th>Tier Kupon</th>
                             <th>Jumlah Klaim</th>
+                            <th>Aksi</th>
                     </thead>
                     <tbody>
                         <?php
@@ -40,6 +41,10 @@
                                 <td><?php echo $row->persentase_diskon ?>%</td>
                                 <td><?php echo $row->tier_kupon ?></td>
                                 <td><?php echo $row->jumlah_klaim ?></td>
+                                <td><a href="<?php echo base_url('welcome/hapus_promo') ?>/<?php echo $row->kode_kupon ?>">
+                            <button onclick = "javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
+                        <a href="<?php echo base_url('welcome/edit_promo') ?>/<?php echo $row->kode_kupon ?>">
+                            <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

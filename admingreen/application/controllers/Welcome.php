@@ -48,6 +48,20 @@ class Welcome extends CI_Controller
 		$this->load->view('edit_penjemputan', $data);
 		$this->load->view('footer');
 	}
+	public function hapus_promo($kode_kupon)
+	{
+		$where = array ('kode_kupon'=>$kode_kupon);
+		$this->m_admin->hapus_penjemputan($where, 'kupon');
+		redirect('welcome/promo/');
+	}
+	public function edit_promo($kode_kupon){
+		$where = array ('kode_kupon'=>$kode_kupon);
+		$data['kupon'] = $this->m_admin->edit_penjemputan($where, 'kupon')->result();
+		$this->load->view('header');
+		$this->load->view('topbar');
+		$this->load->view('edit_member', $data);
+		$this->load->view('footer');
+	}
 	public function update_penjemputan(){
 		$id_order = $this->input->post('id_order');
 		$berat = $this->input->post('berat');

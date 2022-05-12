@@ -28,6 +28,7 @@
                         <th>Tier Member</th>
                         <th>Total Laundry</th>
                         <th>Total Harga</th>
+                        <th>Aksi</th>
                 </thead>
                 <tbody>
                 <?php
@@ -43,6 +44,10 @@
                         <td><?php echo $row->tier_member ?></td>
                         <td><?php echo $row->total_laundry ?></td>
                         <td><?php echo $row->total_harga ?></td>
+                        <td><a href="<?php echo base_url('welcome/hapus_member') ?>/<?php echo $row->id_member ?>">
+                            <button onclick = "javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
+                        <a href="<?php echo base_url('welcome/edit_member') ?>/<?php echo $row->id_member ?>">
+                            <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
                     </tr>
                 <?php } ?>
                 </tbody>

@@ -48,8 +48,8 @@
                                 <td><?php echo $row->berat ?></td>
                                 <td><?php echo $row->harga ?></td>
                                 <td><?php echo $row->kupon ?></td>
-                                <td onclick = "javascript: return confirm('Anda Yakin Hapus?')"><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
+                                <td><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
+                                        <button onclick = "javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
                                     <a href="<?php echo base_url('welcome/edit_penjemputan') ?>/<?php echo $row->id_order ?>">
                                         <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
                             </tr>
