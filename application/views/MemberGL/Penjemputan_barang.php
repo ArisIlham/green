@@ -40,7 +40,11 @@
                                     if ($row->id_kupon === $row2->id_kupon && $row2->terpakai == 0 && $row2->masa_berlaku >= date("Y-m-d")) {
 
                             ?>
-                                        <option value="<?= $row2->kode_kupon ?>"><?= $row->judul_kupon ?></option>
+                                        <option value="<?= $row2->kode_kupon ?>"><?= $row->judul_kupon ?>
+                                            <input type="hidden" name="id_kupon_member" value="<?= $row2->id_kupon_member ?>">
+                                            <input type="hidden" name="judul_kupon" value="<?= $row2->judul_kupon ?>">
+                                        </option>
+
                             <?php
                                     }
                                 }

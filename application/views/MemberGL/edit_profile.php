@@ -34,6 +34,10 @@
                                 <label for="nama" class="form-label">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Anda" value="<?= $nama; ?>">
                             </div>
+                            <div class=" mb-3">
+                                <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?= $tanggal_lahir; ?>">
+                            </div>
                             <div class="mb-3">
                                 <label for="no_hp" class="form-label">Nomor HP</label>
                                 <input type="text" class="form-control" id="no_hp" placeholder="Masukkan No HP Anda" name="no_hp" value="<?= $no_hp; ?>">
@@ -94,6 +98,10 @@
                 nama: {
                     required: true,
                     minlength: 3,
+                },
+                tanggal_lahir: {
+                    required: true,
+                    date: true
                 },
                 no_hp: {
                     required: true,

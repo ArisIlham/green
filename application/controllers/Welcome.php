@@ -30,7 +30,11 @@ class Welcome extends CI_Controller
 
 	public function order()
 	{
-		$this->load->view('halaman_penjemputan_customer/index');
+		if ($this->session->userdata("id_member") == NULL) {
+			$this->load->view('halaman_penjemputan_customer/index');
+		} else {
+			redirect(base_url('member/order'), "location");
+		}
 	}
 
 	public function presensi()

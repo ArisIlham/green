@@ -105,7 +105,7 @@ class Member extends CI_Controller
     {
         $order = $this->Order_model;
         $order->order();
-        redirect(base_url('order'), 'refresh');
+        $this->load->view('MemberGL/proses_penjemputan', $this->session->userdata());
     }
 
     public function dashboard()
@@ -144,6 +144,13 @@ class Member extends CI_Controller
 
     public function profile()
     {
+        $member = $this->Member_model;
+        $order = $this->Order_model;
+        $total_laundry = $order->total($this->session->userdata('id_member'))["total_laundry"];
+        $total_harga = $order->total($this->session->userdata('id_member'))["total_harga"];
+        $total_kupon = $order->total($this->session->userdata('id_member'))["total_kupon"];
+        $this->session->set_userdata("total_kupon", $total_kupon);
+        $member->total(array("id_member" => $this->session->userdata('id_member'), "total_laundry" => $total_laundry, "total_harga" => $total_harga));
         $this->load->view('MemberGL/navigation', ["title" => "Profile Member"]);
         if ($this->session->userdata('id_member') == NULL) {
             redirect(base_url('login'), 'location');
@@ -154,6 +161,9 @@ class Member extends CI_Controller
 
     public function history()
     {
+        $order = $this->Order_model;
+        $data = $order->history($this->session->userdata('id_member'));
+        $this->session->set_userdata("order", $data);
         $this->load->view('MemberGL/navigation', ["title" => "Riwayat Pesanan"]);
         if ($this->session->userdata('id_member') == NULL) {
             redirect(base_url('login'), 'location');
@@ -228,6 +238,7 @@ class Member extends CI_Controller
         $data = [
             "id_kupon" => $kupon->id_kupon,
             "kode_kupon" => $kupon->kode_kupon,
+            "judul_kupon" => $kupon->judul_kupon,
             "persentase_diskon" => $kupon->persentase_diskon,
             "min_laundry" => $kupon->min_laundry,
             "masa_berlaku" => $kupon->masa_berlaku,

@@ -20,7 +20,7 @@
                             <th>Judul Kupon</th>
                             <th>Masa Berlaku</th>
                             <th>Keterangan</th>
-                            <th>Miniman Laundry</th>
+                            <th>Minimal Laundry</th>
                             <th>Persentase Diskon</th>
                             <th>Tier Kupon</th>
                             <th>Jumlah Klaim</th>
@@ -39,7 +39,17 @@
                                 <td><?php echo $row->keterangan ?></td>
                                 <td><?php echo $row->min_laundry ?>kg</td>
                                 <td><?php echo $row->persentase_diskon ?>%</td>
-                                <td><?php echo $row->tier_kupon ?></td>
+                                <td><?php if ($row->tier_kupon == 0) {
+                                        echo "newMember";
+                                    } elseif ($row->tier_kupon == 1) {
+                                        echo "Silver";
+                                    } elseif ($row->tier_kupon == 2) {
+                                        echo "Gold";
+                                    } elseif ($row->tier_kupon == 3) {
+                                        echo "Platinum";
+                                    } else {
+                                        echo "Semua Tier";
+                                    } ?></td>
                                 <td><?php echo $row->jumlah_klaim ?></td>
                                 <td><a href="<?php echo base_url('welcome/hapus_promo') ?>/<?php echo $row->kode_kupon ?>">
                             <button onclick = "javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  

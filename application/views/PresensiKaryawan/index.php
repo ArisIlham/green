@@ -16,7 +16,11 @@
         <div class="kotakPresensi">
             <?php
             if (isset($success)) {
-                echo "<p>Berhasil Presensi</p>";
+                if ($success == "TRUE") {
+                    echo "<p style='background-color: springgreen; width: 100%; text-align: center;'>Berhasil Presensi</p>";
+                } else {
+                    echo "<p style='background-color: red; color: white; width: 100%; text-align: center;'>Sedang Terjadi Kesalahan Sistem atau Anda Sudah Melakukan Presensi Sebelumnya. Silahkan Hubungi Admin</p>";
+                }
             }
             ?>
             <h1 class="title">Presensi Karyawan Green Laundry</h1>

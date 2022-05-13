@@ -13,26 +13,32 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body">Pesanan Berlangsung</div>
-                        <?php foreach ($order as $row) {
-                            if ($row->status == 2) {
-                        ?>
-                                <div class="card-footer d-flex align-items-center justify-content-between" onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
-                                    <div>
-                                        <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= $row->jenis_barang ?></p>
-                                        <p class="small text-white stretched-link" style="margin-bottom:1px;"><?= "(" . $row->waktu_jemput . ")" ?></p>
+                        <table id="recent" width="100%" cellspacing="0">
+                            <tbody>
+                                <?php $count = 0;
+                                foreach ($order as $row) {
+                                    if ($row->status == 2) {
+                                ?>
+                                        <tr class="card-footer d-flex align-items-center justify-content-between" onclick="location.href = `<?= base_url('Member/detail/' . $row->id_order) ?>`">
+                                            <td><?= $row->jenis_barang ?><br><?= "(" . $row->waktu_jemput . ")" ?></td>
+                                            <td>
+                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                            </td>
+                                        </tr>
+                                    <?php $count++;
+                                    }
+                                }
+                                if ($count == 0) {
+                                    ?>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="small text-white stretched-link" style="margin-bottom:1px;">Tidak Ada Pesanan</p>
+                                        </div>
                                     </div>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            <?php } else {
-                            ?>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <p class="small text-white stretched-link" style="margin-bottom:1px;">Tidak Ada Pesanan</p>
-                                    </div>
-                                </div>
-                        <?php }
-                        } ?>
+                                <?php } ?>
 
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -46,7 +52,7 @@
                     <div style="display: flex;">
                     <?php
                 } ?>
-                    <?php if ($row->masa_berlaku >= date("Y-m-d") && $row->tier_kupon == $tier_member || $row->masa_berlaku >= date("Y-m-d") && $row->id_member == $id_member) { ?>
+                    <?php if ($row->masa_berlaku >= date("Y-m-d") && $row->tier_kupon == $tier_member || $row->masa_berlaku >= date("Y-m-d") && $row->id_member == $id_member || $row->masa_berlaku >= date("Y-m-d") && $row->tier_kupon == 4) { ?>
                         <form id="kupon" action="<?= base_url('Member/addKupon') ?>" method="POST">
                             <input id="gg" type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <input type="hidden" name="id_kupon" id="id_kupon" value="<?= $row->id_kupon ?>">
@@ -94,7 +100,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-
         <?php foreach ($kupon as $row) {
             foreach ($kupon_member as $row2) {
                 if ($row->id_kupon === $row2->id_kupon) {
