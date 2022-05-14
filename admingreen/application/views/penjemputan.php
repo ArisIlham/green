@@ -53,12 +53,6 @@
                                     } ?>kg</td>
                                 <td>Rp<?php echo number_format($row->harga, 2, ',', '.') ?></td>
                                 <td><?php echo $row->kupon ?></td>
-<<<<<<< HEAD
-                                <td><a href="<?php echo base_url('welcome/hapus_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button onclick = "javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
-                                    <a href="<?php echo base_url('welcome/edit_penjemputan') ?>/<?php echo $row->id_order ?>">
-                                        <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
-=======
                                 <td><?php if ($row->status == 1) {
                                         echo "Selesai";
                                     } elseif ($row->status == 2) {
@@ -81,7 +75,6 @@
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-ban"></i></button></a>
                                     </div>
                                 </td>
->>>>>>> a5d05a226c5964ed53fcf28db5561342d387a931
                             </tr>
                         <?php } ?>
                     </tbody>
