@@ -10,6 +10,10 @@ class Welcome extends CI_Controller
 		$this->load->model('Order_model');
 		$this->load->model('kuponMember_model');
 		$this->load->helper('url');
+		$this->load->library('session');
+		if ($this->session->userdata('status') != "login") {
+			redirect(base_url("auth"));
+		}
 	}
 
 	public function index()
@@ -40,7 +44,7 @@ class Welcome extends CI_Controller
 	{
 		$where = array('id_order' => $id_order);
 		$this->m_admin->hapus_penjemputan($where, 'order');
-		redirect('welcome/penjemputan/');
+		redirect('welcome/s/');
 	}
 	public function edit_penjemputan($id_order)
 	{
@@ -51,21 +55,67 @@ class Welcome extends CI_Controller
 		$this->load->view('edit_penjemputan', $data);
 		$this->load->view('footer');
 	}
-	public function hapus_promo($kode_kupon)
+	public function pending_penjemputan($id_order)
 	{
-		$where = array ('kode_kupon'=>$kode_kupon);
-		$this->m_admin->hapus_penjemputan($where, 'kupon');
+		$this->m_admin->pending_penjemputan($id_order);
+		redirect('welcome/penjemputan/');
+	}
+	public function selesai_penjemputan($id_order)
+	{
+		$where = array('id_order' => $id_order);
+		$this->m_admin->selesai_penjemputan($where, 'order');
+		redirect('welcome/penjemputan/');
+	}
+	public function batal_penjemputan($id_order)
+	{
+		$where = array('id_order' => $id_order);
+		$this->m_admin->batal_penjemputan($where, 'order');
+		redirect('welcome/penjemputan/');
+	}
+	public function hapus_promo($id_kupon)
+	{
+		$where = array('id_kupon' => $id_kupon);
+		$this->m_admin->hapus_promo($where, 'kupon');
 		redirect('welcome/promo/');
 	}
-	public function edit_promo($kode_kupon){
-		$where = array ('kode_kupon'=>$kode_kupon);
+	public function edit_promo($id_kupon)
+	{
+		$where = array('id_kupon' => $id_kupon);
 		$data['kupon'] = $this->m_admin->edit_penjemputan($where, 'kupon')->result();
 		$this->load->view('header');
 		$this->load->view('topbar');
-		$this->load->view('edit_member', $data);
+		$this->load->view('edit_promo', $data);
 		$this->load->view('footer');
 	}
-	public function update_penjemputan(){
+	public function update_promo()
+	{
+		$id_kupon = uniqid();
+		$kode_kupon = $this->input->post('kode_kupon');
+		$judul_kupon = $this->input->post('judul_kupon');
+		$masa_berlaku = $this->input->post('masa_berlaku');
+		$min_laundry = $this->input->post('min_laundry');
+		$persentase_diskon = $this->input->post('persentase_diskon');
+		$tier_kupon = $this->input->post('tier_kupon');
+		$jumlah_klaim = $this->input->post('jumlah_klaim');
+		$keterangan = $this->input->post('keterangan');
+		$data = array(
+			'kode_kupon' => $kode_kupon,
+			'judul_kupon' => $judul_kupon,
+			'masa_berlaku' => $masa_berlaku,
+			'min_laundry' => $min_laundry,
+			'persentase_diskon' => $persentase_diskon,
+			'tier_kupon' => $tier_kupon,
+			'jumlah_klaim' => $jumlah_klaim,
+			'keterangan' => $keterangan,
+		);
+		$where = array(
+			'id_kupon' => $id_kupon,
+		);
+		$this->m_admin->update_promo($where, $data, 'kupon');
+		redirect('Welcome/promo');
+	}
+	public function update_penjemputan()
+	{
 		$id_order = $this->input->post('id_order');
 		$data_order = $this->m_admin->edit_penjemputan(["id_order" => $id_order], 'order')->row();
 		$data_kupon = $this->kuponMember_model->getKupon($data_order->id_kupon_member);
@@ -95,8 +145,8 @@ class Welcome extends CI_Controller
 		$this->m_admin->update_penjemputan($where, $data, 'order');
 
 		$id_member = $this->m_admin->edit_penjemputan(["id_order" => $id_order], 'order')->row();
-		$total_laundry = $order->total($id_member->id_member)["total_laundry"];
-		$total_harga = $order->total($id_member->id_member)["total_harga"];
+		$total_laundry = $id_order->total($id_member->id_member)["total_laundry"];
+		$total_harga = $id_order->total($id_member->id_member)["total_harga"];
 		if ($total_laundry >= 25 && $total_laundry < 60) {
 			$tier_member = 2;
 		} else if ($total_laundry >= 60) {

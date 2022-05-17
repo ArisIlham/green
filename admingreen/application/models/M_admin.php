@@ -2,7 +2,10 @@
 
 class M_admin extends CI_Model
 {
-
+	function cek_login($table, $where)
+	{
+		return $this->db->get_where($table, $where);
+	}
 	function tampil_penjemputan()
 	{
 		$query = $this->db->get('order');
@@ -47,6 +50,11 @@ class M_admin extends CI_Model
 		$this->db->where($where);
 		$this->db->delete($table);
 	}
+	function hapus_promo($where, $table)
+	{
+		$this->db->where($where);
+		$this->db->delete($table);
+	}
 	function edit_penjemputan($where, $table)
 	{
 		return $this->db->get_where($table, $where);
@@ -65,6 +73,11 @@ class M_admin extends CI_Model
 		$this->db->update($table, ["status" => 0], $where);
 	}
 	function update_penjemputan($where, $data, $table)
+	{
+		$this->db->where($where);
+		$this->db->update($table, $data);
+	}
+	function update_promo($where, $data, $table)
 	{
 		$this->db->where($where);
 		$this->db->update($table, $data);

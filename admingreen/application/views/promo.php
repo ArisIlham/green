@@ -51,10 +51,11 @@
                                         echo "Semua Tier";
                                     } ?></td>
                                 <td><?php echo $row->jumlah_klaim ?></td>
-                                <td><a href="<?php echo base_url('welcome/hapus_promo') ?>/<?php echo $row->kode_kupon ?>">
-                            <button onclick = "javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>  
-                        <a href="<?php echo base_url('welcome/edit_promo') ?>/<?php echo $row->kode_kupon ?>">
-                            <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a></td>
+                                <td><a href="<?php echo base_url('welcome/hapus_promo') ?>/<?php echo $row->id_kupon ?>">
+                                        <button onclick="javascript: return confirm('Anda Yakin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></a>
+                                    <a href="<?php echo base_url('welcome/edit_promo') ?>/<?php echo $row->id_kupon ?>">
+                                        <button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button></a>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>
