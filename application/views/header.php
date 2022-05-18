@@ -39,7 +39,7 @@
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
     <a href="<?= base_url() ?>" class="logo d-flex align-items-center">
-      <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/logo.png" alt="">
+      <img src="<?php echo base_url('/asset/assets/'); ?>assets/img/home/logo.png" alt="">
       <span>Green Laundry Ekspress</span>
     </a>
 
