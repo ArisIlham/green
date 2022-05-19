@@ -9,7 +9,7 @@ class Member extends CI_Controller
         $this->load->model('Member_model');
         $this->load->model('Order_model');
         $this->load->model('Kupon_model');
-        $this->load->model('kuponMember_model');
+        $this->load->model('KuponMember_model');
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->helper(['form', 'url', 'file']);
@@ -88,7 +88,7 @@ class Member extends CI_Controller
         $order = $this->Order_model;
         $order->orderMember($this->session->userdata("id_member"));
         if ($this->input->post("kupon") != "") {
-            $this->kuponMember_model->terpakai($this->input->post("kupon"));
+            $this->KuponMember_model->terpakai($this->input->post("kupon"));
         }
         redirect(base_url('Member/proses'), "location");
     }
@@ -110,7 +110,7 @@ class Member extends CI_Controller
 
     public function dashboard()
     {
-        $kupon_member = $this->kuponMember_model->getKupon($this->session->userdata("id_member"));
+        $kupon_member = $this->KuponMember_model->getKupon($this->session->userdata("id_member"));
         $this->session->set_userdata("kupon_member", $kupon_member);
         $this->load->view('MemberGL/navigation', ["title" => "Dashboard Member"]);
         if ($this->session->userdata('id_member') == NULL) {
@@ -243,15 +243,15 @@ class Member extends CI_Controller
             "min_laundry" => $kupon->min_laundry,
             "masa_berlaku" => $kupon->masa_berlaku,
         ];
-        $this->kuponMember_model->addKupon($data, $this->session->userdata("id_member"));
-        $kupon_member = $this->kuponMember_model->getKupon($this->session->userdata("id_member"));
+        $this->KuponMember_model->addKupon($data, $this->session->userdata("id_member"));
+        $kupon_member = $this->KuponMember_model->getKupon($this->session->userdata("id_member"));
         $this->session->set_userdata("kupon_member", $kupon_member);
         redirect(base_url('member/dashboard'), "refresh");
     }
 
     public function getKupon()
     {
-        $kupon = $this->kuponMember_model;
+        $kupon = $this->KuponMember_model;
         $res = array('csrfName' => $this->security->get_csrf_token_name(), 'csrfHash' => $this->security->get_csrf_hash(), 'kupon' => $kupon->getKupon($this->session->userdata("id_member")));
         echo json_encode($res);
     }

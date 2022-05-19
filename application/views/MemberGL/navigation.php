@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title><?= $title; ?></title>
+    <link href="<?php echo base_url('/asset/assets/'); ?>assets/img/home/logo.png" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="<?php echo base_url('/asset/assets/'); ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- <link href="<?php echo base_url('/asset/assets/'); ?>assets/css/sb-admin-2.min.css" rel="stylesheet"> -->
@@ -25,7 +26,7 @@
     <div id="layoutSidenav">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<?= base_url('/') ?>">GREEN LAUNDRY</a>
+            <a class="navbar-brand ps-3" href="<?= base_url('Member/Dashboard') ?>">GREEN LAUNDRY</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#layoutSidenav_nav"><i class="fas fa-bars"></i></button>
 
