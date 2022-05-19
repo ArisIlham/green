@@ -424,4 +424,22 @@ class Welcome extends CI_Controller
 		$writer->save('php://output');
 		exit;
 	}
+	public function tambah_admin()
+	{
+		$this->load->view('header');
+		$this->load->view('topbar');
+		$this->load->view('tambahadmin');
+		$this->load->view('footer');
+	}
+	public function tambah_admin_aksi()
+	{
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$data = array(
+			'username' => $username,
+			'password' => $password,
+		);
+		$this->m_admin->input_admin($data, 'admin');
+		redirect('Welcome/index');
+	}
 }

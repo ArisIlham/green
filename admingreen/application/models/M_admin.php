@@ -151,4 +151,8 @@ class M_admin extends CI_Model
 		$this->db->where('status=', 'Hadir');
 		return $this->db->count_all_results('presensi');
 	}
+	function input_admin($data)
+	{
+		$this->db->insert('admin', $data);
+	}
 }

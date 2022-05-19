@@ -41,7 +41,11 @@
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="<?php echo base_url("Auth/logout"); ?>" data-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item" href="<?php echo base_url("welcome/tambah_admin"); ?>">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Tambah admin
+                        </a>
+                        <a class="dropdown-item" href="<?php echo base_url("Auth/logout"); ?>">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
