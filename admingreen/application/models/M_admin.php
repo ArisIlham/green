@@ -38,6 +38,16 @@ class M_admin extends CI_Model
 	function input_karyawan($data)
 	{
 		$this->db->insert('karyawan', $data);
+		date_default_timezone_set('Asia/Jakarta');
+		$datetime = new DateTime("now");
+		$presensi = array(
+			"id_presensi" => uniqid(),
+			"id_karyawan" => $data["id_karyawan"],
+			"nama" => $data["nama"],
+			"status" => "Tidak Hadir",
+			"tanggal" => $datetime->format('Y-m-d')
+		);
+		$this->db->insert("presensi", $presensi);
 	}
 	function detail_penjemputan($id_order)
 	{

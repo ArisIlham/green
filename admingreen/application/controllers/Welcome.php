@@ -144,9 +144,10 @@ class Welcome extends CI_Controller
 		);
 		$this->m_admin->update_penjemputan($where, $data, 'order');
 
+		$order = $this->Order_model;
 		$id_member = $this->m_admin->edit_penjemputan(["id_order" => $id_order], 'order')->row();
-		$total_laundry = $id_order->total($id_member->id_member)["total_laundry"];
-		$total_harga = $id_order->total($id_member->id_member)["total_harga"];
+		$total_laundry = $order->total($id_member->id_member)["total_laundry"];
+		$total_harga = $order->total($id_member->id_member)["total_harga"];
 		if ($total_laundry >= 25 && $total_laundry < 60) {
 			$tier_member = 2;
 		} else if ($total_laundry >= 60) {
