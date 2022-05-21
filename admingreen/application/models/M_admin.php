@@ -112,7 +112,7 @@ class M_admin extends CI_Model
 	function jumlah_pemasukan()
 	{
 		$this->db->select('sum(harga) as jumlah_pemasukan');
-		$query = $this->db->get('order');
+		$query = $this->db->get_where('order', ["status" => 1]);
 		if ($query->result()) {
 			return $query->result();
 		} else {
